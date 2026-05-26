@@ -2,155 +2,143 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>十一中学学校论坛</title>
+<title>十一中学学生论坛</title>
 <style>
-*{margin:0;padding:0;font-family:"宋体",SimSun;}
-body{background:#f0f0f0;font-size:14px;line-height:1.6;}
-.bar-top{
-    background:#000080;
-    color:#fff;
-    padding:8px 12px;
-    font-size:16px;
-    font-weight:bold;
-}
-.bar-title{
-    background:#b8d4f0;
-    padding:10px 15px;
-    font-size:18px;
-    font-weight:bold;
-    border-bottom:1px solid #999;
-}
-/* 楼层通用样式 */
-.floor{
-    background:#fff;
-    margin:8px 10px;
-    border:1px solid #ccc;
-    padding:12px;
-}
-.floor-header{
-    color:#0000cc;
-    font-weight:bold;
-    margin-bottom:8px;
-    border-bottom:1px dotted #aaa;
-    padding-bottom:5px;
-}
-.floor-content{
-    color:#000;
-    font-size:14px;
-    word-break:break-all;
-}
-.floor-time{
-    color:#666;
-    font-size:12px;
-    margin-top:8px;
-    text-align:right;
-}
-/* 楼主高亮 */
-.louzhu{
-    background:#e8f4ff;
-    border:1px solid #0066cc;
-}
-/* 复古像素蓝字 */
-.blue-text{
-    color:#0000cc;
-    font-weight:bold;
-}
-/* 精品帖标签 */
-.jingtie{
-    color:red;
-    font-weight:bold;
-    margin-right:10px;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:"宋体",SimSun;}
+body{background:#f0f0f0;font-size:14px;}
+.top-bar{display:flex;justify-content:space-between;background:#000080;color:#fff;padding:8px 15px;font-size:12px;}
+.banner{background:#b8d4f0;padding:20px;text-align:center;border-bottom:2px solid #999;}
+.banner h1{color:#000080;}
+.sub-nav{display:flex;flex-wrap:wrap;background:#fff;border-bottom:1px solid #ccc;}
+.sub-nav-item{display:flex;align-items:center;gap:6px;padding:8px 12px;cursor:pointer;color:#00c;}
+.sub-nav-item img{width:16px;height:16px;}
+.main{display:flex;max-width:1000px;margin:10px auto;gap:10px;padding:0 10px;}
+.left{flex:7;}
+.right{flex:3;}
+.box{background:#fff;border:1px solid #ccc;margin-bottom:10px;}
+.box-tit{background:#000080;color:#fff;padding:6px 10px;font-weight:bold;}
+.forum-inner{display:flex;padding:10px;gap:10px;}
+.forum-img{width:120px;height:100px;object-fit:cover;cursor:pointer;}
+.article{line-height:1.8;}
+.article a{display:block;color:#0000cc;text-decoration:none;margin:4px 0;}
+.article a:hover{text-decoration:underline;}
+.list{padding:8px;line-height:1.8;}
+.list li{list-style:none;padding-left:10px;position:relative;}
+.list li:before{content:"•";position:absolute;left:0;color:#00c;}
+.list a{color:#00c;text-decoration:none;}
+.login-body{padding:10px;}
+.login-item{margin:8px 0;}
+.login-item input{padding:4px;width:100%;}
+.radio-box{margin:10px 0;font-size:12px;}
+.btn-group{display:flex;gap:10px;margin-top:10px;}
+.btn{padding:6px 10px;background:#000080;color:#fff;border:none;cursor:pointer;}
+.ad-box{background:#fff;border:1px solid #ccc;padding:10px;margin-bottom:10px;text-align:center;font-size:12px;line-height:1.6;cursor:pointer;}
+.beer-ad{background:#fff8e1;color:#900;}
+.ring-ad{background:#e1f8ff;color:#009;}
+.hot-list{padding:8px;line-height:1.8;list-style:none;}
+.hot-list li{padding-left:10px;position:relative;}
+.hot-list li:before{content:"🔹";position:absolute;left:0;}
+.hot-list a{color:#c00;}
 </style>
 </head>
 <body>
 
-<!-- 贴吧顶部栏 -->
-<div class="bar-top">十一中学学校论坛</div>
-<div class="bar-title">
-    <span class="jingtie">【精品帖】</span>听取大家的意见，我们共同促进校园食品健康，保证校园饮食透明化！
+<div class="top-bar">
+    <div>llriddleschool.com 校园驿站</div>
+    <div>娱乐基地<br>写真·欧美·音乐<br>影视·动漫·游戏</div>
+    <div>青春驿站<br>校园文学·绝对原创<br>校园论坛·毕业求职</div>
+    <div>时尚之苑<br>情感·商城·粤人谷<br>奇闻·聊天·伊甸园</div>
+    <div>互动天地<br>短信·社区·校友录<br>骑士·搜·Q·拍卖</div>
 </div>
 
-<!-- 1楼 楼主 -->
-<div class="floor louzhu">
-    <div class="floor-header">1楼【楼主】风轻云淡</div>
-    <div class="floor-content">
-        <span class="blue-text">【风轻云淡】：听取大家的意见，我们共同促进校园食品健康，保证校园饮食透明化，大家人人精品！吃的放心...</span>
+<div class="banner">
+    <h1>十一中学学生论坛</h1>
+</div>
+
+<div class="sub-nav">
+    <div class="sub-nav-item">校友录</div>
+    <div class="sub-nav-item">邮件</div>
+    <div class="sub-nav-item">新闻</div>
+    <div class="sub-nav-item">学校风光</div>
+    <div class="sub-nav-item">杂志</div>
+    <div class="sub-nav-item">学生中心</div>
+</div>
+
+<div class="main">
+    <div class="left">
+        <div class="box">
+            <div class="box-tit">校园论坛</div>
+            <div class="forum-inner">
+                <img class="forum-img" src="https://ts1.tc.mm.bing.net/th/id/R-C.a8759574aaccf5ed54b2e0c844ac4937?rik=iatmbqRAJx4tFw&amp;riu=http%3a%2f%2fsheencity-bj.oss-cn-hangzhou.aliyuncs.com%2fofficial-site%2fpictures%2f2014-01%2f13%2f91a4a3b35675fb09177bfa0e2160fb11.jpg&amp;ehk=POCvUvp7e0xfTi3omqmbSWAU5Q%2bR9i9s8nYRbSyKp5A%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0">
+                <div class="article">
+                    <p class="hot-text">十一中学校园论坛 请校友友好讨论</p>
+
+                    <!-- 👇 这一行我已经帮你改成正确链接！-->
+                    <a href="https://menge32423.github.io/huajuan030/" target="_blank">精品：【风轻云淡】：听取大家的意见 我们共同促进校园食品健康 保证校园收费透明化 大家可以吃的放心...（5年前）</a>
+
+                    <a href="#">【爱吃玉米123】：笃行楼谁捡到了一张水卡，上面贴有叮当猫...（1分钟前）</a>
+                    <a href="#">【疯狂小子雅各】：话说有人听说sxw事件吗？我想趁晚上没人听一下...（2分钟前）</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="box-tit">每日纪事</div>
+            <ul class="list">
+                <li><a href="#">卷卷复合肥总经理受贿事发，依法遭重罚</a></li>
+                <li><a href="#">卷市股票大跌，是蓄谋已久的阴谋，还是新时代的必然结果</a></li>
+                <li><a href="#">知名历史学家张真武因病去世，享年89岁</a></li>
+                <li><a href="#">伦敦千禧穹顶开幕，全球倒计时直播，“千年虫”问题有惊无险</a></li>
+                <li><a href="#">阿萨姆花卷当选卷国总统，开启长期执政</a></li>
+                <li><a href="#">学生对食品的要求日益增高，营养学家李德明的看法</a></li>
+            </ul>
+        </div>
     </div>
-    <div class="floor-time">2003-05-12 13:25:22</div>
-</div>
 
-<!-- 2楼 -->
-<div class="floor">
-    <div class="floor-header">2楼 猴王why</div>
-    <div class="floor-content">唉，其实我一直觉得学校的羊肉总有股怪怪的味道...每次和老班说总会被教训一顿。</div>
-    <div class="floor-time">2003-05-12 13:30:10</div>
-</div>
+    <div class="right">
+        <div class="box">
+            <div class="box-tit">🔐 密码登录入口</div>
+            <div class="login-body">
+                <div class="login-item"><label>账号：</label><input type="text"></div>
+                <div class="login-item"><label>密码：</label><input type="password"></div>
+                <div class="radio-box">
+                    <input type="radio" name="login" checked="">
+                    <label>学生登陆</label><br>
+                    <input type="radio" name="login">
+                    <label>教师登陆</label>
+                </div>
+                <div class="btn-group">
+                    <button class="btn">验证密码</button>
+                    <button class="btn">重置输入</button>
+                </div>
+            </div>
+        </div>
 
-<!-- 3楼 -->
-<div class="floor">
-    <div class="floor-header">3楼 熊哥不爱吃猪肉</div>
-    <div class="floor-content">你们听说没，最近有个营养家说什么，对于肉类产品的检验，很多运往学校的肉类品质都有问题，好像是什么合成肉。</div>
-    <div class="floor-time">2003-05-12 13:35:47</div>
-</div>
+        <div class="ad-box beer-ad">
+            <h3>花卷牌啤酒</h3>
+            <p>优品小麦酿造 老牌风味</p>
+            <p>清爽麦香 欢聚必备</p>
+            <p>加盟热线：9931200122</p>
+        </div>
 
-<!-- 4楼 -->
-<div class="floor">
-    <div class="floor-header">4楼 ┌;ξǒrrγ.夙`灬.</div>
-    <div class="floor-content">
-        卫生是大问题，有时候肉里有头发、虫子，反馈了也没人管，太无奈了。
+        <div class="ad-box ring-ad">
+            <h3>火爆免费彩铃</h3>
+            <p>03年热门金曲 一键订购</p>
+            <p>点播专线：8866521</p>
+            <p>炫酷铃声抢先体验</p>
+        </div>
+
+        <div class="box">
+            <div class="box-tit">论坛热搜</div>
+            <ul class="hot-list">
+                <li><a href="#">熊牌公司猪肉抗生素超标</a></li>
+                <li><a href="#">央视起底宠物神药黑幕</a></li>
+                <li><a href="#">蚊子的鸿门宴来了</a></li>
+                <li><a href="#">好学生成休学主力军</a></li>
+            </ul>
+        </div>
     </div>
-    <div class="floor-time">2003-05-12 14:02:15</div>
 </div>
 
-<!-- 5楼 -->
-<div class="floor">
-    <div class="floor-header">5楼 黑黑的胳膊肘</div>
-    <div class="floor-content">
-        希望学校能公开食材采购渠道，每天公示食材，做到透明化，我们学生吃着也安心。
-    </div>
-    <div class="floor-time">2003-05-12 14:18:33</div>
-</div>
-
-<!-- 6楼 -->
-<div class="floor">
-    <div class="floor-header">6楼 疯狂小子雅各</div>
-    <div class="floor-content">早上的包子也是，偶尔吃起来有股怪味，分不清到底是啥肉...真难吃还卖那么贵</div>
-    <div class="floor-time">2003-05-12 14:45:09</div>
-</div>
-
-<!-- 7楼 -->
-<div class="floor">
-    <div class="floor-header">7楼 葱油花卷</div>
-    <div class="floor-content">
-        不光是食堂，校门口的小摊也得管，油炸食品、三无辣条太多了，好多同学天天吃。
-    </div>
-    <div class="floor-time">2003-05-12 15:10:26</div>
-</div>
-
-<!-- 8楼 -->
-<div class="floor">
-    <div class="floor-header">8楼 棉花糖7674</div>
-    <div class="floor-content">
-        建议定期让学生代表去后厨检查，拍照公示，这样才能真正透明！
-    </div>
-    <div class="floor-time">2003-05-12 15:33:41</div>
-</div>
-
-<!-- 9楼 -->
-<div class="floor">
-    <div class="floor-header">9楼 土豆泥王子</div>
-    <div class="floor-content">
-        终于有人说这个事了！我早就想吐槽了，希望这帖别沉，顶上去！
-    </div>
-    <div class="floor-time">2003-05-12 16:01:55</div>
-</div>
-
-<!-- 10楼 -->
-<div class="floor">
-    <div class="floor-header">10楼 梦回1998</div>
-    <div class="floor-content">支持！申请严查肉供应商，是学校的问题还是上面的问题，我们学生需要一个答复。</div>
-    <div class="floor-time">2003-05-12 16:28:12</div>
-</div>
-
-</body></html>
+</body>
+</html>
