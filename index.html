@@ -20,21 +20,11 @@ body{background:#f0f0f0;font-size:14px;}
 .forum-inner{display:flex;padding:10px;gap:10px;}
 .forum-img{width:120px;height:100px;object-fit:cover;cursor:pointer;}
 .article{line-height:1.8;}
-/* 仅增加蓝色文字互动，不改布局 */
-.article a,.list a,.hot-list a{
-    color:#0000cc;
-    text-decoration:none;
-    display:block;
-    margin:4px 0;
-}
-.article a:hover,.list a:hover,.hot-list a:hover{
-    color:#0066ff;
-    text-decoration:underline;
-}
+.article a,.list a,.hot-list a{color:#0000cc;text-decoration:none;display:block;margin:4px 0;}
+.article a:hover,.list a:hover,.hot-list a:hover{color:#0066ff;text-decoration:underline;}
 .list{padding:8px;line-height:1.8;}
-.list li{list-style:none;padding-left:10px;position:relative;display:flex;align-items:center;gap:8px;}
+.list li{list-style:none;padding-left:10px;position:relative;}
 .list li:before{content:"•";position:absolute;left:0;color:#00c;}
-.list .news-avatar{width:32px;height:32px;border-radius:50%;object-fit:cover;}
 .login-body{padding:10px;}
 .login-item{margin:8px 0;}
 .login-item input{padding:4px;width:100%;}
@@ -48,6 +38,12 @@ body{background:#f0f0f0;font-size:14px;}
 .hot-list li{padding-left:10px;position:relative;}
 .hot-list li:before{content:"🔹";position:absolute;left:0;}
 .hot-list a{color:#c00;}
+/* 弹窗文章样式 */
+.pop{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;background:#fff;padding:20px;border:2px solid #000080;z-index:999;}
+.pop img{width:100%;height:220px;object-fit:cover;margin:10px 0;}
+.pop h3{color:#000080;margin-bottom:10px;}
+.pop p{line-height:1.7;font-size:14px;}
+.close{margin-top:10px;padding:5px 10px;background:#000080;color:#fff;border:none;cursor:pointer;}
 </style>
 </head>
 <body>
@@ -99,7 +95,6 @@ body{background:#f0f0f0;font-size:14px;}
                 <img class="forum-img" src="https://ts1.tc.mm.bing.net/th/id/R-C.a8759574aaccf5ed54b2e0c844ac4937?rik=iatmbqRAJx4tFw&amp;riu=http%3a%2f%2fsheencity-bj.oss-cn-hangzhou.aliyuncs.com%2fofficial-site%2fpictures%2f2014-01%2f13%2f91a4a3b35675fb09177bfa0e2160fb11.jpg&amp;ehk=POCvUvp7e0xfTi3omqmbSWAU5Q%2bR9i9s8nYRbSyKp5A%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0">
                 <div class="article">
                     <p class="hot-text">十一中学校园论坛 请校友友好讨论</p>
-
                     <a href="https://menge32423.github.io/huajuan030/">精品：【风轻云淡】：听取大家的意见 我们共同促进校园食品健康 保证校园收费透明化 大家可以吃的放心...（5年前）</a>
                     <a href="#">【爱吃玉米123】：笃行楼谁捡到了一张水卡，上面贴有叮当猫...（1分钟前）</a>
                     <a href="#">【疯狂小子雅各】：话说有人听说sxw事件吗？我想趁晚上没人听一下...（2分钟前）</a>
@@ -110,30 +105,12 @@ body{background:#f0f0f0;font-size:14px;}
         <div class="box">
             <div class="box-tit">每日纪事</div>
             <ul class="list">
-                <li>
-                    <img class="news-avatar" src="https://i.pravatar.cc/32?img=1">
-                    <a href="#">卷卷复合肥总经理受贿事发，依法遭重罚</a>
-                </li>
-                <li>
-                    <img class="news-avatar" src="https://i.pravatar.cc/32?img=2">
-                    <a href="#">卷市股票大跌，是蓄谋已久的阴谋，还是新时代的必然结果</a>
-                </li>
-                <li>
-                    <img class="news-avatar" src="https://i.pravatar.cc/32?img=3">
-                    <a href="#">知名历史学家张真武因病去世，享年89岁</a>
-                </li>
-                <li>
-                    <img class="news-avatar" src="https://i.pravatar.cc/32?img=4">
-                    <a href="#">伦敦千禧穹顶开幕，全球倒计时直播，“千年虫”问题有惊无险</a>
-                </li>
-                <li>
-                    <img class="news-avatar" src="https://i.pravatar.cc/32?img=5">
-                    <a href="#">阿萨姆花卷当选卷国总统，开启长期执政</a>
-                </li>
-                <li>
-                    <img class="news-avatar" src="https://i.pravatar.cc/32?img=6">
-                    <a href="#">学生对食品的要求日益增高，营养学家李德明的看法</a>
-                </li>
+                <li><a onclick="showPop(0)">卷卷复合肥总经理受贿事发，依法遭重罚</a></li>
+                <li><a onclick="showPop(1)">卷市股票大跌，是蓄谋已久的阴谋，还是新时代的必然结果</a></li>
+                <li><a onclick="showPop(2)">知名历史学家张真武因病去世，享年89岁</a></li>
+                <li><a onclick="showPop(3)">伦敦千禧穹顶开幕，全球倒计时直播，“千年虫”问题有惊无险</a></li>
+                <li><a onclick="showPop(4)">阿萨姆花卷当选卷国总统，开启长期执政</a></li>
+                <li><a onclick="showPop(5)">学生对食品的要求日益增高，营养学家李德明的看法</a></li>
             </ul>
         </div>
     </div>
@@ -142,20 +119,11 @@ body{background:#f0f0f0;font-size:14px;}
         <div class="box">
             <div class="box-tit">🔐 密码登录入口</div>
             <div class="login-body">
-                <div class="login-item">
-                    <label>账号：</label>
-                    <input type="text" id="user">
-                </div>
-                <div class="login-item">
-                    <label>密码：</label>
-                    <input type="password" id="pwd">
-                </div>
+                <div class="login-item"><label>账号：</label><input type="text" id="user"></div>
+                <div class="login-item"><label>密码：</label><input type="password" id="pwd"></div>
                 <div class="radio-box">
-                    <input type="radio" name="login" checked="">
-                    <label>学生登陆</label>
-                    <br>
-                    <input type="radio" name="login">
-                    <label>教师登陆</label>
+                    <input type="radio" name="login" checked><label>学生登陆</label><br>
+                    <input type="radio" name="login"><label>教师登陆</label>
                 </div>
                 <div class="btn-group">
                     <button class="btn" onclick="checkLogin()">验证密码</button>
@@ -163,21 +131,8 @@ body{background:#f0f0f0;font-size:14px;}
                 </div>
             </div>
         </div>
-
-        <div class="ad-box beer-ad">
-            <h3>花卷牌啤酒</h3>
-            <p>优品小麦酿造 老牌风味</p>
-            <p>清爽麦香 欢聚必备</p>
-            <p>加盟热线：9931200122</p>
-        </div>
-
-        <div class="ad-box ring-ad">
-            <h3>火爆免费彩铃</h3>
-            <p>03年热门金曲 一键订购</p>
-            <p>点播专线：8866521</p>
-            <p>炫酷铃声抢先体验</p>
-        </div>
-
+        <div class="ad-box beer-ad"><h3>花卷牌啤酒</h3><p>优品小麦酿造 老牌风味</p><p>清爽麦香 欢聚必备</p><p>加盟热线：9931200122</p></div>
+        <div class="ad-box ring-ad"><h3>火爆免费彩铃</h3><p>03年热门金曲 一键订购</p><p>点播专线：8866521</p><p>炫酷铃声抢先体验</p></div>
         <div class="box">
             <div class="box-tit">论坛热搜</div>
             <ul class="hot-list">
@@ -190,18 +145,64 @@ body{background:#f0f0f0;font-size:14px;}
     </div>
 </div>
 
+<!-- 文章弹窗 -->
+<div class="pop" id="popBox">
+    <h3 id="popTitle"></h3>
+    <img id="popImg" src="">
+    <p id="popText"></p>
+    <button class="close" onclick="document.getElementById('popBox').style.display='none'">关闭</button>
+</div>
+
 <script>
-// 严格固定账号密码：20030109 / congyouhuajuan
+// 登录验证
 function checkLogin(){
-    const u = document.getElementById('user').value;
-    const p = document.getElementById('pwd').value;
-    if(u === '20030109' && p === 'congyouhuajuan'){
-        alert("登录成功，欢迎进入十一中学学生中心");
-    }else{
-        alert("账号或密码错误，请重新输入");
+    const u=document.getElementById('user').value;
+    const p=document.getElementById('pwd').value;
+    if(u==='20030109'&&p==='congyouhuajuan')alert("登录成功，欢迎进入十一中学学生中心");
+    else alert("账号或密码错误，请重新输入");
+}
+
+// 6篇400字左右文章+配图
+const articles=[
+    {
+        title:"卷卷复合肥总经理受贿事发，依法遭重罚",
+        img:"https://images.unsplash.com/photo-1526304640581-d334cdb95d8e",
+        text:"近日，卷卷复合肥集团总经理因长期利用职务便利收受贿赂、违规挪用企业资金，被司法机关立案查处，案件引发当地市场与农业行业广泛关注。经调查，该负责人在原料采购、经销商合作、项目招标等环节多次收受巨额好处费，为合作方提供不正当便利，严重扰乱农资市场公平秩序。\n\n随着案件细节公开，公众意识到大型农资企业腐败对农户利益、粮食安全的潜在危害。此次查处不仅是对个人违法行为的惩戒，也为行业敲响警钟。监管部门表示，将持续加强农资领域反腐力度，完善企业内控与外部监督机制，守护农业市场健康发展，维护广大农户的切身利益。"
+    },
+    {
+        title:"卷市股票大跌，是蓄谋已久的阴谋，还是新时代的必然结果",
+        img:"https://images.unsplash.com/photo-1611974789677-23f579f5682a",
+        text:"近期卷市股市出现断崖式下跌，多支权重股连续多日走低，投资者恐慌情绪蔓延，市场围绕下跌原因展开激烈讨论。有人认为背后存在资本恶意做空、内部操盘等人为阴谋，利用信息差收割散户；也有观点指出，这是经济转型、产业调整带来的必然结果。\n\n从宏观层面看，传统产业增长放缓、新兴行业竞争加剧、外部环境波动，共同冲击市场信心。同时散户投资不理性、跟风投机，放大了市场震荡。此次大跌既是风险释放，也是市场自我调整。无论是否存在人为干预，都提醒投资者理性看待波动，监管层面也需完善制度，防范恶意操控，稳定资本市场秩序。"
+    },
+    {
+        title:"知名历史学家张真武因病去世，享年89岁",
+        img:"https://images.unsplash.com/photo-1580915411545-282cb1b0d780",
+        text:"我国知名历史学家张真武先生因病逝世，享年89岁，学界与社会各界深切缅怀。张真武深耕近现代史研究六十余年，治学严谨，著作等身，聚焦地方史、民间史料、近代社会变迁，挖掘大量一手档案，填补多项学术空白。\n\n他一生淡泊名利，常年奔走各地收集口述史料与民间文献，致力于历史知识普及，多次走进校园开展讲座，鼓励青年正视历史、理性思考。其严谨的治学态度与人文情怀，影响了几代历史爱好者。先生的离世是史学界重大损失，但他留下的研究成果与精神财富，将长久激励后人继续探索历史、传承文化。"
+    },
+    {
+        title:"伦敦千禧穹顶开幕，全球倒计时直播，“千年虫”问题有惊无险",
+        img:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23",
+        text:"千禧年到来之际，伦敦千禧穹顶正式盛大开幕，全球多国同步开启跨世纪倒计时直播，成为世纪之交标志性盛事。此前全世界高度紧张的“千年虫”危机，最终有惊无险平稳度过。\n\n千年虫源于早期计算机年份仅用两位数字存储，人们担忧系统崩溃、金融瘫痪、交通失控。各国提前数年开展排查、升级、测试，投入海量人力物力。跨年当晚，全球系统平稳运行，危机解除。千禧穹顶的狂欢与千年虫的化解，见证人类迈入新世纪，既展现科技进步的力量，也让人们重视信息安全，为后续数字时代发展积累宝贵经验。"
+    },
+    {
+        title:"阿萨姆花卷当选卷国总统，开启长期执政",
+        img:"https://images.unsplash.com/photo-1567449303078-57ad525a87f4",
+        text:"经过全民大选，阿萨姆花卷成功当选卷国新一任总统，开启长期执政时代，国内舆论对此褒贬不一。阿萨姆花卷以务实亲民的竞选理念获得大量底层民众支持，承诺改善民生、稳定物价、完善公共服务，同时推进对外友好交流。\n\n反对派则担忧长期执政模式会弱化监督，影响民主活力。上任之初，新总统便推出一系列惠民政策，优先解决就业、教育、医疗难题，获得初步认可。国际社会密切关注卷国政策走向，期待该国在新领导下实现稳定发展。此次大选，也成为卷国近代政治进程中的重要转折点。"
+    },
+    {
+        title:"学生对食品的要求日益增高，营养学家李德明的看法",
+        img:"https://images.unsplash.com/photo-1544025162-d76694265947",
+        text:"如今青少年学生群体对日常饮食、校园食堂食品的要求越来越高，不再只追求饱腹，更加关注安全、营养、口味与健康。针对这一趋势，知名营养学家李德明发表专业看法，引发校园与家长广泛共鸣。\n\n李德明表示，学生处于身体发育关键阶段，合理膳食至关重要。校园食品必须严控食材安全，拒绝添加剂超标、劣质原料；同时要兼顾营养均衡，搭配蛋白质、维生素、膳食纤维。他建议学校优化食堂菜品，减少重油重盐，定期公示食材来源。同时提醒学生拒绝垃圾食品，养成健康饮食习惯，家校共同发力，守护青少年健康成长。"
     }
+];
+
+function showPop(i){
+    const a=articles[i];
+    document.getElementById('popTitle').innerText=a.title;
+    document.getElementById('popImg').src=a.img;
+    document.getElementById('popText').innerText=a.text;
+    document.getElementById('popBox').style.display='block';
 }
 </script>
-
 </body>
 </html>
