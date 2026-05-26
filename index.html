@@ -1,4 +1,6 @@
-<html lang="zh-CN"><head>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
 <meta charset="UTF-8">
 <title>十一中学学生论坛</title>
 <style>
@@ -18,12 +20,21 @@ body{background:#f0f0f0;font-size:14px;}
 .forum-inner{display:flex;padding:10px;gap:10px;}
 .forum-img{width:120px;height:100px;object-fit:cover;cursor:pointer;}
 .article{line-height:1.8;}
-.article a{display:block;color:#0000cc;text-decoration:none;margin:4px 0;}
-.article a:hover{text-decoration:underline;}
+/* 仅增加蓝色文字互动，不改布局 */
+.article a,.list a,.hot-list a{
+    color:#0000cc;
+    text-decoration:none;
+    display:block;
+    margin:4px 0;
+}
+.article a:hover,.list a:hover,.hot-list a:hover{
+    color:#0066ff;
+    text-decoration:underline;
+}
 .list{padding:8px;line-height:1.8;}
-.list li{list-style:none;padding-left:10px;position:relative;}
+.list li{list-style:none;padding-left:10px;position:relative;display:flex;align-items:center;gap:8px;}
 .list li:before{content:"•";position:absolute;left:0;color:#00c;}
-.list a{color:#00c;text-decoration:none;}
+.list .news-avatar{width:32px;height:32px;border-radius:50%;object-fit:cover;}
 .login-body{padding:10px;}
 .login-item{margin:8px 0;}
 .login-item input{padding:4px;width:100%;}
@@ -41,103 +52,156 @@ body{background:#f0f0f0;font-size:14px;}
 </head>
 <body>
 
-<div class="top-bar" data-doubao-translate-traverse-mark="1">
-    <div data-doubao-translate-traverse-mark="1">llriddleschool.com 校园驿站</div>
-    <div data-doubao-translate-traverse-mark="1">娱乐基地<br data-doubao-translate-traverse-mark="1">写真·欧美·音乐<br data-doubao-translate-traverse-mark="1">影视·动漫·游戏</div>
-    <div data-doubao-translate-traverse-mark="1">青春驿站<br data-doubao-translate-traverse-mark="1">校园文学·绝对原创<br data-doubao-translate-traverse-mark="1">校园论坛·毕业求职</div>
-    <div data-doubao-translate-traverse-mark="1">时尚之苑<br data-doubao-translate-traverse-mark="1">情感·商城·粤人谷<br data-doubao-translate-traverse-mark="1">奇闻·聊天·伊甸园</div>
-    <div data-doubao-translate-traverse-mark="1">互动天地<br data-doubao-translate-traverse-mark="1">短信·社区·校友录<br data-doubao-translate-traverse-mark="1">骑士·搜·Q·拍卖</div>
+<div class="top-bar">
+    <div>llriddleschool.com 校园驿站</div>
+    <div>娱乐基地<br>写真·欧美·音乐<br>影视·动漫·游戏</div>
+    <div>青春驿站<br>校园文学·绝对原创<br>校园论坛·毕业求职</div>
+    <div>时尚之苑<br>情感·商城·粤人谷<br>奇闻·聊天·伊甸园</div>
+    <div>互动天地<br>短信·社区·校友录<br>骑士·搜·Q·拍卖</div>
 </div>
 
-<div class="banner" data-doubao-translate-traverse-mark="1">
-    <h1 data-doubao-translate-traverse-mark="1">十一中学学生论坛</h1>
+<div class="banner">
+    <h1>十一中学学生论坛</h1>
 </div>
 
-<div class="sub-nav" data-doubao-translate-traverse-mark="1">
-    <div class="sub-nav-item" data-doubao-translate-traverse-mark="1">校友录</div>
-    <div class="sub-nav-item" data-doubao-translate-traverse-mark="1">邮件</div>
-    <div class="sub-nav-item" data-doubao-translate-traverse-mark="1">新闻</div>
-    <div class="sub-nav-item" data-doubao-translate-traverse-mark="1">学校风光</div>
-    <div class="sub-nav-item" data-doubao-translate-traverse-mark="1">杂志</div>
-    <div class="sub-nav-item" data-doubao-translate-traverse-mark="1">学生中心</div>
+<div class="sub-nav">
+    <div class="sub-nav-item">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6600'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E">
+        校友录
+    </div>
+    <div class="sub-nav-item">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6600'%3E%3Cpath d='M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z'/%3E%3C/svg%3E">
+        邮件
+    </div>
+    <div class="sub-nav-item">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6600'%3E%3Cpath d='M20 11H4v2h16v-2zM4 7h16v2H4V7zm0 4h16v2H4v-2z'/%3E%3C/svg%3E">
+        新闻
+    </div>
+    <div class="sub-nav-item">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6600'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5-10-5-10 5zM2 12l10 5 10-5-10-5-10 5z'/%3E%3C/svg%3E">
+        学校风光
+    </div>
+    <div class="sub-nav-item">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6600'%3E%3Cpath d='M4 6h16v2H4V6zm0 4h16v2H4v-2zm0 4h10v2H4v-2z'/%3E%3C/svg%3E">
+        杂志
+    </div>
+    <div class="sub-nav-item">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6600'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/%3E%3C/svg%3E">
+        学生中心
+    </div>
 </div>
 
-<div class="main" data-doubao-translate-traverse-mark="1">
-    <div class="left" data-doubao-translate-traverse-mark="1">
-        <div class="box" data-doubao-translate-traverse-mark="1">
-            <div class="box-tit" data-doubao-translate-traverse-mark="1">校园论坛</div>
-            <div class="forum-inner" data-doubao-translate-traverse-mark="1">
-                <img class="forum-img" src="https://ts1.tc.mm.bing.net/th/id/R-C.a8759574aaccf5ed54b2e0c844ac4937?rik=iatmbqRAJx4tFw&amp;riu=http%3a%2f%2fsheencity-bj.oss-cn-hangzhou.aliyuncs.com%2fofficial-site%2fpictures%2f2014-01%2f13%2f91a4a3b35675fb09177bfa0e2160fb11.jpg&amp;ehk=POCvUvp7e0xfTi3omqmbSWAU5Q%2bR9i9s8nYRbSyKp5A%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0" data-doubao-translate-traverse-mark="1">
-                <div class="article" data-doubao-translate-traverse-mark="1">
-                    <p class="hot-text" data-doubao-translate-traverse-mark="1">十一中学校园论坛 请校友友好讨论</p>
+<div class="main">
+    <div class="left">
+        <div class="box">
+            <div class="box-tit">校园论坛</div>
+            <div class="forum-inner">
+                <img class="forum-img" src="https://ts1.tc.mm.bing.net/th/id/R-C.a8759574aaccf5ed54b2e0c844ac4937?rik=iatmbqRAJx4tFw&amp;riu=http%3a%2f%2fsheencity-bj.oss-cn-hangzhou.aliyuncs.com%2fofficial-site%2fpictures%2f2014-01%2f13%2f91a4a3b35675fb09177bfa0e2160fb11.jpg&amp;ehk=POCvUvp7e0xfTi3omqmbSWAU5Q%2bR9i9s8nYRbSyKp5A%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0">
+                <div class="article">
+                    <p class="hot-text">十一中学校园论坛 请校友友好讨论</p>
 
-                    <!-- 👇 这一行我已经帮你改成正确链接！-->
-                    <a href="https://menge32423.github.io/huajuan030/index.html" target="_blank" data-doubao-translate-traverse-mark="1">精品：【风轻云淡】：听取大家的意见 我们共同促进校园食品健康 保证校园收费透明化 大家可以吃的放心...（5年前）</a>
-
-                    <a href="#" data-doubao-translate-traverse-mark="1">【爱吃玉米123】：笃行楼谁捡到了一张水卡，上面贴有叮当猫...（1分钟前）</a>
-                    <a href="#" data-doubao-translate-traverse-mark="1">【疯狂小子雅各】：话说有人听说sxw事件吗？我想趁晚上没人听一下...（2分钟前）</a>
+                    <a href="https://menge32423.github.io/huajuan030/">精品：【风轻云淡】：听取大家的意见 我们共同促进校园食品健康 保证校园收费透明化 大家可以吃的放心...（5年前）</a>
+                    <a href="#">【爱吃玉米123】：笃行楼谁捡到了一张水卡，上面贴有叮当猫...（1分钟前）</a>
+                    <a href="#">【疯狂小子雅各】：话说有人听说sxw事件吗？我想趁晚上没人听一下...（2分钟前）</a>
                 </div>
             </div>
         </div>
 
-        <div class="box" data-doubao-translate-traverse-mark="1">
-            <div class="box-tit" data-doubao-translate-traverse-mark="1">每日纪事</div>
-            <ul class="list" data-doubao-translate-traverse-mark="1">
-                <li data-doubao-translate-traverse-mark="1"><a href="#">卷卷复合肥总经理受贿事发，依法遭重罚</a></li>
-                <li data-doubao-translate-traverse-mark="1"><a href="#">卷市股票大跌，是蓄谋已久的阴谋，还是新时代的必然结果</a></li>
-                <li data-doubao-translate-traverse-mark="1"><a href="#">知名历史学家张真武因病去世，享年89岁</a></li>
-                <li data-doubao-translate-traverse-mark="1"><a href="#">伦敦千禧穹顶开幕，全球倒计时直播，“千年虫”问题有惊无险</a></li>
-                <li data-doubao-translate-traverse-mark="1"><a href="#">阿萨姆花卷当选卷国总统，开启长期执政</a></li>
-                <li data-doubao-translate-traverse-mark="1"><a href="#">学生对食品的要求日益增高，营养学家李德明的看法</a></li>
+        <div class="box">
+            <div class="box-tit">每日纪事</div>
+            <ul class="list">
+                <li>
+                    <img class="news-avatar" src="https://i.pravatar.cc/32?img=1">
+                    <a href="#">卷卷复合肥总经理受贿事发，依法遭重罚</a>
+                </li>
+                <li>
+                    <img class="news-avatar" src="https://i.pravatar.cc/32?img=2">
+                    <a href="#">卷市股票大跌，是蓄谋已久的阴谋，还是新时代的必然结果</a>
+                </li>
+                <li>
+                    <img class="news-avatar" src="https://i.pravatar.cc/32?img=3">
+                    <a href="#">知名历史学家张真武因病去世，享年89岁</a>
+                </li>
+                <li>
+                    <img class="news-avatar" src="https://i.pravatar.cc/32?img=4">
+                    <a href="#">伦敦千禧穹顶开幕，全球倒计时直播，“千年虫”问题有惊无险</a>
+                </li>
+                <li>
+                    <img class="news-avatar" src="https://i.pravatar.cc/32?img=5">
+                    <a href="#">阿萨姆花卷当选卷国总统，开启长期执政</a>
+                </li>
+                <li>
+                    <img class="news-avatar" src="https://i.pravatar.cc/32?img=6">
+                    <a href="#">学生对食品的要求日益增高，营养学家李德明的看法</a>
+                </li>
             </ul>
         </div>
     </div>
 
-    <div class="right" data-doubao-translate-traverse-mark="1">
-        <div class="box" data-doubao-translate-traverse-mark="1">
-            <div class="box-tit" data-doubao-translate-traverse-mark="1">🔐 密码登录入口</div>
-            <div class="login-body" data-doubao-translate-traverse-mark="1">
-                <div class="login-item" data-doubao-translate-traverse-mark="1"><label data-doubao-translate-traverse-mark="1">账号：</label><input type="text" data-doubao-translate-traverse-mark="1"></div>
-                <div class="login-item" data-doubao-translate-traverse-mark="1"><label data-doubao-translate-traverse-mark="1">密码：</label><input type="password" data-doubao-translate-traverse-mark="1"></div>
-                <div class="radio-box" data-doubao-translate-traverse-mark="1">
-                    <input type="radio" name="login" checked="" data-doubao-translate-traverse-mark="1">
-                    <label data-doubao-translate-traverse-mark="1">学生登陆</label><br data-doubao-translate-traverse-mark="1">
-                    <input type="radio" name="login" data-doubao-translate-traverse-mark="1">
-                    <label data-doubao-translate-traverse-mark="1">教师登陆</label>
+    <div class="right">
+        <div class="box">
+            <div class="box-tit">🔐 密码登录入口</div>
+            <div class="login-body">
+                <div class="login-item">
+                    <label>账号：</label>
+                    <input type="text" id="user">
                 </div>
-                <div class="btn-group" data-doubao-translate-traverse-mark="1">
-                    <button class="btn" data-doubao-translate-traverse-mark="1">验证密码</button>
-                    <button class="btn" data-doubao-translate-traverse-mark="1">重置输入</button>
+                <div class="login-item">
+                    <label>密码：</label>
+                    <input type="password" id="pwd">
+                </div>
+                <div class="radio-box">
+                    <input type="radio" name="login" checked="">
+                    <label>学生登陆</label>
+                    <br>
+                    <input type="radio" name="login">
+                    <label>教师登陆</label>
+                </div>
+                <div class="btn-group">
+                    <button class="btn" onclick="checkLogin()">验证密码</button>
+                    <button class="btn" onclick="document.getElementById('user').value='';document.getElementById('pwd').value=''">重置输入</button>
                 </div>
             </div>
         </div>
 
-        <div class="ad-box beer-ad" data-doubao-translate-traverse-mark="1">
-            <h3 data-doubao-translate-traverse-mark="1">花卷牌啤酒</h3>
-            <p data-doubao-translate-traverse-mark="1">优品小麦酿造 老牌风味</p>
-            <p data-doubao-translate-traverse-mark="1">清爽麦香 欢聚必备</p>
-            <p data-doubao-translate-traverse-mark="1">加盟热线：9931200122</p>
+        <div class="ad-box beer-ad">
+            <h3>花卷牌啤酒</h3>
+            <p>优品小麦酿造 老牌风味</p>
+            <p>清爽麦香 欢聚必备</p>
+            <p>加盟热线：9931200122</p>
         </div>
 
-        <div class="ad-box ring-ad" data-doubao-translate-traverse-mark="1">
-            <h3 data-doubao-translate-traverse-mark="1">火爆免费彩铃</h3>
-            <p data-doubao-translate-traverse-mark="1">03年热门金曲 一键订购</p>
-            <p data-doubao-translate-traverse-mark="1">点播专线：8866521</p>
-            <p data-doubao-translate-traverse-mark="1">炫酷铃声抢先体验</p>
+        <div class="ad-box ring-ad">
+            <h3>火爆免费彩铃</h3>
+            <p>03年热门金曲 一键订购</p>
+            <p>点播专线：8866521</p>
+            <p>炫酷铃声抢先体验</p>
         </div>
 
-        <div class="box" data-doubao-translate-traverse-mark="1">
-            <div class="box-tit" data-doubao-translate-traverse-mark="1">论坛热搜</div>
-            <ul class="hot-list" data-doubao-translate-traverse-mark="1">
-                <li data-doubao-translate-traverse-mark="1"><a href="#">熊牌公司猪肉抗生素超标</a></li>
-                <li data-doubao-translate-traverse-mark="1"><a href="#">央视起底宠物神药黑幕</a></li>
-                <li data-doubao-translate-traverse-mark="1"><a href="#">蚊子的鸿门宴来了</a></li>
-                <li data-doubao-translate-traverse-mark="1"><a href="#">好学生成休学主力军</a></li>
+        <div class="box">
+            <div class="box-tit">论坛热搜</div>
+            <ul class="hot-list">
+                <li><a href="#">熊牌公司猪肉抗生素超标</a></li>
+                <li><a href="#">央视起底宠物神药黑幕</a></li>
+                <li><a href="#">蚊子的鸿门宴来了</a></li>
+                <li><a href="#">好学生成休学主力军</a></li>
             </ul>
         </div>
     </div>
 </div>
 
+<script>
+// 严格固定账号密码：20030109 / congyouhuajuan
+function checkLogin(){
+    const u = document.getElementById('user').value;
+    const p = document.getElementById('pwd').value;
+    if(u === '20030109' && p === 'congyouhuajuan'){
+        alert("登录成功，欢迎进入十一中学学生中心");
+    }else{
+        alert("账号或密码错误，请重新输入");
+    }
+}
+</script>
 
-
-<doubao-ai-csui id="53150f3a0ba844d5bae42ec6e0faf72f" data-host-id="76e007c1-7340-4bd8-a47f-448c1150981f" data-doubao-translate-traverse-mark="1"></doubao-ai-csui><div id="doubao-ai-translate-image-assistant76e007c1-7340-4bd8-a47f-448c1150981f" data-collection-img-host-id="76e007c1-7340-4bd8-a47f-448c1150981f" data-doubao-translate-traverse-mark="1"></div><div data-doubao-translate-traverse-mark="1" style="width: 0px; height: 0px; position: absolute; z-index: 200000;"></div></body></html>
+</body>
+</html>
