@@ -6,352 +6,625 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:"宋体",SimSun;}
 body{background:#f0f0f0;font-size:14px;}
+.search-bar{display:none;background:#fff;border:1px solid #ccc;padding:8px;text-align:center;margin:8px auto;max-width:1000px;}
+.search-bar input{width:220px;padding:4px;border:1px solid #666;}
+.search-bar button{padding:4px 10px;background:#000080;color:#fff;border:none;cursor:pointer;}
 .top-bar{display:flex;justify-content:space-between;background:#000080;color:#fff;padding:8px 15px;font-size:12px;}
-.banner{background:#b8d4f0;padding:20px;text-align:center;border-bottom:2px solid #999;}
-.banner h1{color:#000080;}
+.banner{
+    background:#b8d4f0;padding:20px;text-align:center;
+    border-bottom:2px solid #999;
+}
+.banner-title{
+    font-size:24px;
+    color:#000080;
+    font-weight:bold;
+}
+.zhouyu{
+    display:none;color:#CC0000;font-size:20px;font-weight:bold;
+    letter-spacing:6px;white-space:nowrap;animation:blink 1.2s infinite alternate;
+}
+@keyframes blink{0%{opacity:1;}100%{opacity:0.4;}}
+@keyframes shake-once{0%{transform:translate(0,0);}50%{transform:translate(1px,0);}100%{transform:translate(0,0);}}
+.shake{animation:shake-once 0.3s ease forwards;}
 .sub-nav{display:flex;flex-wrap:wrap;background:#fff;border-bottom:1px solid #ccc;}
 .sub-nav-item{display:flex;align-items:center;gap:6px;padding:8px 12px;cursor:pointer;color:#00c;}
 .sub-nav-item img{width:16px;height:16px;}
 .main{display:flex;max-width:1000px;margin:10px auto;gap:10px;padding:0 10px;}
-.left{flex:7;}
-.right{flex:3;}
+.left{flex:7;}.right{flex:3;}
 .box{background:#fff;border:1px solid #ccc;margin-bottom:10px;}
 .box-tit{background:#000080;color:#fff;padding:6px 10px;font-weight:bold;}
 .forum-inner{display:flex;padding:10px;gap:10px;}
-.forum-img{width:120px;height:100px;object-fit:cover;cursor:pointer;}
+.forum-img{width:120px;height:100px;object-fit:cover;}
 .article{line-height:1.8;}
 .article a,.list a,.hot-list a{color:#0000cc;text-decoration:none;display:block;margin:4px 0;}
 .article a:hover,.list a:hover,.hot-list a:hover{color:#0066ff;text-decoration:underline;}
 .list{padding:8px;line-height:1.8;}
 .list li{list-style:none;padding-left:10px;position:relative;}
-.list li:before{content:"•";position:absolute;left:0;color:#00c;}
+.list li:before{content:"•";position:absolute:left:0;color:#00c;}
 .login-body{padding:10px;}
 .login-item{margin:8px 0;}
 .login-item input{padding:4px;width:100%;}
 .radio-box{margin:10px 0;font-size:12px;}
 .btn-group{display:flex;gap:10px;margin-top:10px;}
 .btn{padding:6px 10px;background:#000080;color:#fff;border:none;cursor:pointer;}
-.ad-box{background:#fff;border:1px solid #ccc;padding:10px;margin-bottom:10px;text-align:center;font-size:12px;line-height:1.6;cursor:pointer;}
+.ad-box{background:#fff;border:1px solid #ccc;padding:10px;margin-bottom:10px;text-align:center;font-size:12px;line-height:1.6;}
 .beer-ad{background:#fff8e1;color:#900;}
 .ring-ad{background:#e1f8ff;color:#009;}
 .hot-list{padding:8px;line-height:1.8;list-style:none;}
 .hot-list li{padding-left:10px;position:relative;}
-.hot-list li:before{content:"🔹";position:absolute;left:0;}
+.hot-list li:before{content:"🔹";position:absolute:left:0;}
 .hot-list a{color:#c00;}
-/* 2003古老贴吧弹窗 */
-.tieba-pop{display:none;position:fixed;top:50%;left:50%;transform: translate(-50%,-50%);width:700px;height:85vh;background:#fff;padding:15px;border:2px solid #666;overflow-y:auto;z-index:999;font-family:"宋体";}
+
+.newsWin{display:none;position:fixed;z-index:9999;left:50%;top:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:#fff;border:2px solid #000080;padding:15px;overflow-y:auto;}
+.newsWin .newsTitle{font-size:16px;font-weight:bold;color:#000080;margin-bottom:5px;}
+.newsWin .newsTime{font-size:12px;color:#666;margin-bottom:15px;}
+.newsWin .newsContent{font-size:14px;line-height:1.8;margin-bottom:25px;}
+.newsWin .closeBtn{background:#000080;color:#fff;padding:4px 10px;cursor:pointer;border:none;}
+
+.mailWin{display:none;position:fixed;z-index:9999;left:50%;top:50%;transform:translate(-50%,-50%);width:420px;background:#fff;border:4px solid #000080;padding:20px;font-family:"宋体";}
+.mailWin h3{color:#000080;text-align:center;margin-bottom:15px;}
+.mailForm{line-height:2;margin-bottom:10px;}
+.mailForm input{width:100%;padding:4px;margin-bottom:8px;border:1px solid #666;}
+.mailTip{color:#c00;font-size:12px;text-align:center;margin-top:10px;}
+.mailWin .closeBtn{background:#000080;color:#fff;padding:4px 12px;margin-top:10px;cursor:pointer;border:none;}
+
+.mailBox{
+    display:none;position:fixed;z-index:10000;
+    left:50%;top:50%;transform:translate(-50%,-50%);
+    width:650px;height:520px;background:#fff;border:4px solid #000080;
+    padding:15px;overflow-y:auto;font-family:"宋体";
+}
+.mailBox h3{color:#000080;text-align:center;margin-bottom:15px;font-size:18px;}
+.mail-item{
+    border:1px solid #ccc;margin:8px 0;padding:10px;line-height:1.6;
+}
+.mail-top{background:#f2f2f2;padding:6px;border-bottom:1px solid #ccc;}
+.mail-title{font-weight:bold;color:#000;}
+.mail-info{font-size:12px;color:#666;margin-top:4px;}
+.mail-content{margin-top:8px;font-size:14px;text-indent:2em;}
+.mail-close{
+    text-align:center;margin-top:15px;
+}
+.mail-close button{
+    background:#000080;color:#fff;border:none;padding:5px 15px;cursor:pointer;
+}
+
+.msg-window{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:380px;background:#c0c0c0;border:4px solid #c0c0c0;border-top-color:#fff;border-left-color:#fff;box-shadow:2px 2px 0 0 #000;z-index:9999;font-family:"宋体";}
+.msg-title{background:#000080;color:#fff;padding:4px 8px;font-weight:bold;display:flex;justify-content:space-between;}
+.msg-content{background:#fff;color:#000;padding:16px;text-align:center;border:1px solid #000;margin:4px;}
+.msg-content h2{color:red;font-size:18px;margin-bottom:12px;}
+.msg-content p{font-size:14px;line-height:1.6;}
+.msg-close{text-align:center;padding:8px;}
+.msg-close button{width:60px;height:24px;background:#c0c0c0;border:2px solid #fff;border-right-color:#000;border-bottom-color:#000;cursor:pointer;}
+.tieba-pop{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:85vh;background:#fff;padding:15px;border:2px solid #666;overflow-y:auto;z-index:999;font-family:"宋体";}
 .tieba-pop .tieba-title{font-size:18px;color:#000099;font-weight:bold;margin-bottom:15px;border-bottom:1px solid #ccc;padding-bottom:8px;}
 .tieba-pop .floor{border-bottom:1px dotted #aaa;padding:8px 0;line-height:1.6;font-size:14px;}
 .tieba-pop .floor .uid{color:#990000;margin-right:10px;}
 .tieba-pop .floor .time{color:#666;font-size:12px;margin-left:10px;}
 .tieba-pop .floor .text{margin-top:4px;}
-/* 文章弹窗 */
-.article-pop{display:none;position:fixed;top:50%;left:50%;transform: translate(-50%,-50%);width:600px;background:#fff;padding:20px;border:2px solid #000080;z-index:998;}
+.article-pop{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;background:#fff;padding:20px;border:2px solid #000080;z-index:998;}
 .article-pop img{width:100%;height:220px;object-fit:cover;margin:10px 0;}
 .article-pop h3{color:#000080;margin-bottom:10px;}
 .article-pop p{line-height:1.7;font-size:14px;white-space:pre-line;}
 .close{margin-top:10px;padding:5px 10px;background:#000099;color:#fff;border:none;cursor:pointer;}
-/* 校友录弹窗 新增 */
 .alumni-pop{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:480px;background:#fff;padding:20px;border:2px solid #000080;z-index:1000;font-family:"宋体";}
 .alumni-pop h3{color:#000080;text-align:center;margin-bottom:15px;}
 .alumni-img{width:200px;height:240px;object-fit:cover;display:block;margin:0 auto 15px;border:1px solid #ccc;}
 .alumni-comment{line-height:1.8;font-size:14px;padding:0 10px;}
 .alumni-comment .user{color:#990000;font-weight:bold;}
-
-/* 新增互动样式 */
-.sub-nav-item:hover { background: #e6f2ff; }
-.btn:hover { background: #0000aa; }
-.ad-box:hover { background: #fff3e0; }
-.list li:hover { background: #f8fcff; }
-.hot-list li:hover { background: #fff0f0; }
-.article a:hover { background: #f0f7ff; padding-left:4px; }
-.forum-img:hover { opacity: 0.8; transform:scale(1.02); }
+.mask{display:none;position:fixed;left:0;top:0;width:100%;height:100%;background:#000;opacity:0.6;z-index:997;}
+.diary-pop,.leave-pop{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:460px;background:#fffef0;border:1px solid #d8c8a8;box-shadow:3px 3px 8px rgba(0,0,0,0.2);padding:30px 25px;z-index:10002;font-family:"宋体";line-height:2;}
+.diary-title,.leave-title{color:#0066cc;font-size:22px;text-align:center;margin-bottom:12px;letter-spacing:4px;}
+.diary-time,.leave-time{text-align:right;color:#555;font-size:14px;margin-bottom:20px;padding-right:10px;}
+.diary-content,.leave-content{color:red;font-size:15px;text-indent:2em;padding:0 8px;border-top:1px dashed #ccc;padding-top:15px;}
+.diary-close,.leave-close{display:block;margin:25px auto 0;padding:5px 20px;background:#0066cc;color:#fff;border:none;border-radius:3px;cursor:pointer;font-size:14px;}
 </style>
 </head>
 <body>
 
+<div class="mailWin" id="mailWin">
+    <h3>十一中学 校内邮箱登录</h3>
+    <div class="mailForm">
+        <label>校内账号：</label><input type="text" id="mailUser" placeholder="学号/工号">
+        <label>邮箱密码：</label><input type="password" id="mailPwd" placeholder="请输入密码">
+    </div>
+    <div class="mailTip">请用学校的格式登陆</div>
+    <center>
+        <button class="closeBtn" onclick="checkMailLogin()">登录</button>
+        <button class="closeBtn" onclick="closeMail()">关闭</button>
+    </center>
+</div>
+
+<div class="mailBox" id="mailBox">
+    <h3>校内邮箱 - 收件箱</h3>
+    <div class="mail-item">
+        <div class="mail-top">
+            <div class="mail-title">【置顶】予所有师生的一封信</div>
+            <div class="mail-info">发件人：学校教务处 | 时间：2003-01-08 09:20</div>
+        </div>
+        <div class="mail-content">
+            各位老师、同学：校园是我们共同学习生活的家园，近期校园内出现一些异常情况，还请大家提高安全防范意识。晚间尽量不要独自停留在教学楼、操场等偏僻区域，遇到可疑人员或奇怪现象，请第一时间向值班老师、保安报备。希望全体师生相互照应，平安度过每一天。教务处敬上。
+        </div>
+    </div>
+    <div class="mail-item">
+        <div class="mail-top">
+            <div class="mail-title">秋季运动会报名通知</div>
+            <div class="mail-info">发件人：体育组 | 时间：2003-10-06 14:10</div>
+        </div>
+        <div class="mail-content">
+            我校秋季运动会将于11月3日至4日举办，请各班班长统计参赛人员名单，于10月15日前上报至体育办公室。鼓励全体同学积极参与，强身健体。
+        </div>
+    </div>
+    <div class="mail-item">
+        <div class="mail-top">
+            <div class="mail-title">校园网络升级使用说明</div>
+            <div class="mail-info">发件人：电教中心 | 时间：2003-10-04 11:35</div>
+        </div>
+        <div class="mail-content">
+            校园网络已完成全面升级，电子阅览室、办公室、教室均可正常联网。请各位师生遵守上网规范，禁止浏览不良网站，合理使用网络资源。
+        </div>
+    </div>
+    <div class="mail-item">
+        <div class="mail-top">
+            <div class="mail-title">食堂食材抽检结果公示</div>
+            <div class="mail-info">发件人：后勤处 | 时间：2003-09-10 16:40</div>
+        </div>
+        <div class="mail-content">
+            本周已完成全校食堂食材抽样检查，大部分食材合格。后勤部门会持续把控食品安全，若发现饭菜异常，可及时向后勤处反馈。
+        </div>
+    </div>
+    <div class="mail-item">
+        <div class="mail-top">
+            <div class="mail-title">9月13日班级卫生检查安排</div>
+            <div class="mail-info">发件人：德育处 | 时间：2003-09-08 08:50</div>
+        </div>
+        <div class="mail-content">
+           本周六将进行全校班级卫生大检查，请各班级做好教室、卫生角、走廊区域清扫工作，保持校园整洁环境。
+        </div>
+    </div>
+    <div class="mail-item">
+        <div class="mail-top">
+            <div class="mail-title">月考时间及考场安排</div>
+            <div class="mail-info">发件人：年级组 | 时间：2003-09-11 10:20</div>
+        </div>
+        <div class="mail-content">
+            本月月考定于9月15日全天进行，考场按照原有座位划分，请同学们提前准备考试用品，诚信应考。
+        </div>
+    </div>
+    <div class="mail-item">
+        <div class="mail-top">
+            <div class="mail-title">优秀校友事迹征集公告</div>
+            <div class="mail-info">发件人：校友会 | 时间：2003-09-05 15:10</div>
+        </div>
+        <div class="mail-content">
+            现面向全校征集往届优秀校友相关事迹、照片与故事，整理后将更新至校园校友录板块，欢迎广大师生踊跃投稿。
+        </div>
+    </div>
+    <div class="mail-item">
+        <div class="mail-top">
+            <div class="mail-title">校园论坛发帖规范提醒</div>
+            <div class="mail-info">发件人：论坛管理员 | 时间：2003-09-01 09:00</div>
+        </div>
+        <div class="mail-content">
+            请各位同学文明发帖，理性讨论，禁止传播谣言、恶意言论与不实信息，共同维护和谐的校园网络氛围。
+        </div>
+    </div>
+    <div class="mail-item">
+        <div class="mail-top">
+            <div class="mail-title">水卡遗失招领通知</div>
+            <div class="mail-info">发件人：学生会 | 时间：2003-09-12 20:15</div>
+        </div>
+        <div class="mail-content">
+            有人在笃行楼捡到一张贴有叮当猫贴纸的水卡，请失主前往学生会办公室认领，也请捡到其他物品的同学及时上交。
+        </div>
+    </div>
+    <div class="mail-item">
+        <div class="mail-top">
+            <div class="mail-title">校外人员入校管理规定</div>
+            <div class="mail-info">发件人：保卫科 | 时间：2003-08-28 13:25</div>
+        </div>
+        <div class="mail-content">
+            即日起校外人员入校必须登记身份信息，禁止无关人员随意进入教学区域，保障全体师生人身与财产安全。
+        </div>
+    </div>
+    <div class="mail-item">
+        <div class="mail-top">
+            <div class="mail-title">新生邮箱使用教学文件</div>
+            <div class="mail-info">发件人：葱油花卷 | 时间：2002-01-09 08:30</div>
+        </div>
+        <div class="mail-content">
+            本文件为校内邮箱基础使用教程，访客可使用账号11school@cyhj.com、密码888888临时登录查看公告，该账号仅用于学习查阅，严禁商用。
+        </div>
+    </div>
+    <div class="mail-close">
+        <button onclick="closeMailBox()">关闭收件箱</button>
+    </div>
+</div>
+
+<div class="newsWin" id="newsWin">
+    <div class="newsTitle">我校某系学生最近发生了些许意外</div>
+    <div class="newsTime">2003年1月10日 校内紧急通告</div>
+    <div class="newsContent">02届新闻学学系学生许智斌，于2003年1月9日22点左右，在教学楼内失联。事发当日正值会考期间，因晚自习占用较长时间，导致该班延迟下课。据同班同学反映，该生当天值日，留在教室拖地，在前往清洗拖把后，班里同学迟迟未能等到其返回。临近教学楼锁门时间，许智斌依旧毫无消息，至今处于失联状态。校方已开展内部排查，提醒全体学生注意安全。如各位师生有任何消息，请及时联系教务处。</div>
+    <div class="newsTitle">我校秋季运动会将于下月初顺利举办</div>
+    <div class="newsTime">2003年10月08日 校务公告</div>
+    <div class="newsContent">为增强学生体质，丰富校园文化生活，我校定于11月3日至4日举行秋季田径运动会。望各班积极组织报名，认真训练，争取在比赛中取得优异成绩。</div>
+    <div class="newsTitle">校园网络升级完成，访问速度显著提升</div>
+    <div class="newsTime">2003年10月05日 电教中心</div>
+    <div class="newsContent">经过为期一周的设备调试，我校校园网已全面升级。教室、办公室、电子阅览室均可正常高速访问网络，请同学们文明上网，遵守网络使用规范。</div>
+    <br><button class="closeBtn" onclick="closeNews()">关闭窗口</button>
+</div>
+
+<div class="mask" id="mask"></div>
+<div class="diary-pop" id="diaryPop">
+    <div class="diary-title">日记</div>
+    <div class="diary-time">1998年7月13日</div>
+    <div class="diary-content">
+        我的妈妈很爱我<br>
+        她在三年前因为一场车祸去世了<br>
+        她一生都很善良<br>
+        我们上一次在卷市旅游的时候<br>
+        她买了一个护身符给我<br>
+        我很喜欢<br>
+        上面刻着我的名字还有玉如意<br>
+        但前不久骑车去学校的路上<br>
+        我不小心摔了一跤<br>
+        我的护身符碎了<br>
+        我慌忙地去捡碎掉的护身符<br>
+        里面有一张纸条<br>
+        我很好奇的打开它<br>
+        居然写了一页的：“你去死”
+    </div>
+    <button class="diary-close" onclick="closeDiary()">关闭</button>
+</div>
+<div class="leave-pop" id="leavePop">
+    <div class="leave-title">请假</div>
+    <div class="leave-time"></div>
+    <div class="leave-content">
+        我因为肠胃不舒服请了几天假在家里玩手机 突然听到楼上有小孩子嬉闹的声音 我一开始没怎么当回事 以为是楼上的孩子在打闹 结果第二天相同的时间又发出了相同的动静 接连着几天都在同一时间发出声响 我有些不耐烦 就上楼敲了敲门 结果发现探出头来的是一个眼神空洞的女人 她死死地盯着我 我有点不好意思地说道：“麻烦让您家孩子安静一点，有点影响我休息。”女人没说话 只是看着我 突然她的身下探出两个小孩的头直勾勾地看向我 孩子的脸色苍白 我没有停留就下去了 但我又猛然想起 那两个孩子的身体好像和他们妈妈连在一起 我十分惊恐地跑到楼下保安亭报了警 警察很快就到了 在那间房子里查到了一个女人和两个小孩子的尸体 嫌疑人很快就查到了 但是嫌疑人…居然躲在我的衣柜里…
+    </div>
+    <button class="leave-close" onclick="closeLeave()">关闭</button>
+</div>
+<div class="msg-window" id="msgBox">
+    <div class="msg-title"><span>系统消息</span><span>×</span></div>
+    <div class="msg-content">
+        <h2>你终于来了</h2>
+        <p>很多事情没有你想的那么简单</p>
+    </div>
+    <div class="msg-close"><button onclick="closeMsg()">确定</button></div>
+</div>
+<div class="search-bar" id="searchBar">
+    站内搜索：<input type="text" id="keyword" placeholder="输入关键词查找线索">
+    <button onclick="doSearch()">搜索</button>
+</div>
+
 <div class="top-bar">
-    <div>llriddleschool.com 校园驿站</div>
-    <div>娱乐基地<br>写真·欧美·音乐<br>影视·动漫·游戏</div>
-    <div>青春驿站<br>校园文学·绝对原创<br>校园论坛·毕业求职</div>
-    <div>时尚之苑<br>情感·商城·粤人谷<br>奇闻·聊天·伊甸园</div>
-    <div>互动天地<br>短信·社区·校友录<br>骑士·搜·Q·拍卖</div>
+<div>llriddleschool.com 校园驿站</div>
+<div>娱乐基地<br>写真·欧美·音乐<br>影视·动漫·游戏</div>
+<div>青春驿站<br>校园文学·绝对原创<br>校园论坛·毕业求职</div>
+<div>时尚之苑<br>情感·商城·粤人谷<br>奇闻·聊天·伊甸园</div>
+<div>互动天地<br>短信·社区·校友录<br>骑士·搜·Q·拍卖</div>
 </div>
 
 <div class="banner">
-    <h1>十一中学学生论坛</h1>
+    <div class="banner-title" id="bannerText">十一中学学生论坛</div>
+    <div class="zhouyu" id="zhouyu">䰸魊魑䰫魙䰶䰡䰲䰴䰷䰺䰻䰽䱀䱂䱆䱇䱈䱉䱊䱍䱏䱑䱓䱕䱘䱙䱚䱛䱜䱝䱞</div>
 </div>
 
 <div class="sub-nav">
-    <!-- 这里给校友录加点击事件，其他完全不变 -->
-    <div class="sub-nav-item" onclick="openAlumni()">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6600'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E">
-        校友录
-    </div>
-    <div class="sub-nav-item">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6600'%3E%3Cpath d='M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z'/%3E%3C/svg%3E">
-        邮件
-    </div>
-    <div class="sub-nav-item">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6600'%3E%3Cpath d='M20 11H4v2h16v-2zM4 7h16v2H4V7zm0 4h16v2H4v-2z'/%3E%3C/svg%3E">
-        新闻
-    </div>
-    <div class="sub-nav-item">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6600'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5-10-5-10 5zM2 12l10 5 10-5-10-5-10 5z'/%3E%3C/svg%3E">
-        学校风光
-    </div>
-    <div class="sub-nav-item">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 24 24' fill='%23ff6600'%3E%3Cpath d='M4 6h16v2H4V6zm0 4h16v2H4v-2zm0 4h10v2H4v-2z'/%3E%3C/svg%3E">
-        杂志
-    </div>
-    <div class="sub-nav-item">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6600'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/%3E%3C/svg%3E">
-        学生中心
-    </div>
+<div class="sub-nav-item" onclick="openAlumni()">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6600'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E">校友录
+</div>
+<div class="sub-nav-item" onclick="openMail()">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6600'%3E%3Cpath d='M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z'/%3E%3C/svg%3E">邮件
+</div>
+<div class="sub-nav-item" onclick="openNews()">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6600'%3E%3Cpath d='M20 11H4v2h16v-2zM4 7h16v2H4V7zm0 4h16v2H4v-2z'/%3E%3C/svg%3E">新闻
+</div>
+<div class="sub-nav-item">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6600'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5-10-5-10 5zM2 12l10 5 10-5-10-5-10 5z'/%3E%3C/svg%3E">学校风光
+</div>
+<div class="sub-nav-item">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6600'%3E%3Cpath d='M4 6h16v2H4V6zm0 4h16v2H4v-2zm0 4h10v2H4v-2z'/%3E%3C/svg%3E">杂志
+</div>
+<div class="sub-nav-item">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6600'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/%3E%3C/svg%3E">学生中心
+</div>
 </div>
 
 <div class="main">
-    <div class="left">
-        <div class="box">
-            <div class="box-tit">校园论坛</div>
-            <div class="forum-inner">
-                <img class="forum-img" src="https://ts1.tc.mm.bing.net/th/id/R-C.a8759574aaccf5ed54b2e0c844ac4937?rik=iatmbqRAJx4tFw&amp;riu=http%3a%2f%2fsheencity-bj.oss-cn-hangzhou.aliyuncs.com%2fofficial-site%2fpictures%2f2014-01%2f13%2f91a4a3b35675fb09177bfa0e2160fb11.jpg&amp;ehk=POCvUvp7e0xfTi3omqmbSWAU5Q%2bR9i9s8nYRbSyKp5A%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0">
-                <div class="article">
-                    <p class="hot-text">十一中学校园论坛 请校友友好讨论</p>
-                    <a onclick="showTieba(0)">精品：【风轻云淡】：听取大家的意见 我们共同促进校园食品健康 保证校园收费透明化 大家可以吃的放心…（5年前）</a>
-                    <a onclick="showTieba(1)">【爱吃玉米123】：笃行楼谁捡到了一张水卡，上面贴有叮当猫…（1分钟前）</a>
-                    <a onclick="showTieba(2)">【疯狂小子雅各】：话说有人听说sxw事件吗？我想趁晚上没人听一下…（2分钟前）</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <div class="box-tit">每日纪事</div>
-            <ul class="list">
-                <li><a onclick="showArticle(0)">卷卷复合肥总经理受贿事发，依法遭重罚</a></li>
-                <li><a onclick="showArticle(1)">卷市股票大跌，是蓄谋已久的阴谋，还是新时代的必然结果</a></li>
-                <li><a onclick="showArticle(2)">知名历史学家张真武因病去世，享年89岁</a></li>
-                <li><a onclick="showArticle(3)">伦敦千禧穹顶开幕，全球倒计时直播，“千年虫”问题有惊无险</a></li>
-                <li><a onclick="showArticle(4)">阿萨姆花卷当选卷国总统，开启长期执政</a></li>
-                <li><a onclick="showArticle(5)">学生对食品的要求日益增高，营养学家李德明的看法</a></li>
-            </ul>
-        </div>
-
-        <div class="box">
-            <div class="box-tit">🎯 校园互动区</div>
-            <div style="padding:10px;line-height:1.8;">
-                <div style="margin-bottom:6px;">👉 <b>今日热门投票</b></div>
-                <div style="font-size:13px;color:#00c;cursor:pointer;" onclick="alert('你投了：食堂饭菜优化')">• 食堂饭菜优化建议</div>
-                <div style="font-size:13px;color:#00c;cursor:pointer;" onclick="alert('你投了：增加课外活动')">• 增加课外活动时间</div>
-                <div style="font-size:13px;color:#00c;cursor:pointer;" onclick="alert('你投了：改善校园设施')">• 改善校园设施</div>
-                <div style="margin-top:8px;font-size:12px;color:#666;">已有 128 人参与 | <span style="color:#008000;cursor:pointer;" onclick="showArticle(5)">查看最新营养建议</span></div>
-            </div>
-        </div>
-
-        <div class="box">
-            <div class="box-tit">⏰ 校园今日提醒</div>
-            <div style="padding:10px;font-size:13px;line-height:1.8;">
-                <div>• 9月13日 班级卫生检查</div>
-                <div>• 9月14日 操场运动会彩排</div>
-                <div>• 9月15日 月考时间公布</div>
-                <div style="color:#c00;margin-top:4px;">⚠ 食堂食材抽检中，请注意饮食安全</div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="right">
-        <div class="box">
-            <div class="box-tit">🔐 密码登录入口</div>
-            <div class="login-body">
-                <div class="login-item"><label>账号：</label><input type="text" id="user"></div>
-                <div class="login-item"><label>密码：</label><input type="password" id="pwd"></div>
-                <div class="radio-box">
-                    <input type="radio" name="login" checked><label>学生登陆</label><br>
-                    <input type="radio" name="login"><label>教师登陆</label>
-                </div>
-                <div class="btn-group">
-                    <button class="btn" onclick="checkLogin()">验证密码</button>
-                    <button class="btn" onclick="document.getElementById('user').value='';document.getElementById('pwd').value=''">重置输入</button>
-                </div>
-                <div style="margin-top:10px;font-size:12px;color:#006600;">👥 当前在线：46 人</div>
-                <button class="btn" style="width:100%;margin-top:8px;background:#006600;" onclick="alert('✅ 签到成功！获得论坛积分 +10')">每日签到</button>
-            </div>
-        </div>
-        <div class="ad-box beer-ad"><h3>花卷牌啤酒</h3><p>优品小麦酿造 老牌风味</p><p>清爽麦香 欢聚必备</p><p>加盟热线：9931200122</p></div>
-        <div class="ad-box ring-ad"><h3>火爆免费彩铃</h3><p>03年热门金曲 一键订购</p><p>点播专线：8866521</p><p>炫酷铃声抢先体验</p></div>
-        <div class="box">
-            <div class="box-tit">论坛热搜</div>
-            <ul class="hot-list">
-                <li><a onclick="showArticle(6)">熊牌公司猪肉抗生素超标</a></li>
-                <li><a onclick="showArticle(7)">央视起底宠物神药黑幕</a></li>
-                <li><a onclick="showArticle(8)">蚊子的鸿门宴来了</a></li>
-                <li><a onclick="showArticle(9)">好学生成休学主力军</a></li>
-            </ul>
-        </div>
+<div class="left">
+<div class="box"><div class="box-tit" id="tit1">校园论坛</div>
+<div class="forum-inner">
+    <img class="forum-img" id="campusImg" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2YxYzljOCI+PC9zdmc+">
+    <div class="article">
+        <p class="hot-text">十一中学校园论坛 请校友友好讨论</p>
+        <a onclick="showTieba(0)">精品：【风轻云淡】：听取大家的意见 我们共同促进校园食品健康 保证校园收费透明化 大家可以吃的放心…（5年前）</a>
+        <a onclick="showTieba(1)">【爱吃玉米123】：笃行楼谁捡到了一张水卡，上面贴有叮当猫…（1分钟前）</a>
+        <a onclick="showTieba(2)">【疯狂小子雅各】：话说有人听说sxw事件吗？我想趁晚上没人听一下…（2分钟前）</a>
+        <a onclick="showTieba(3)">精品：【葱油花卷】：校内邮箱使用教学（2002年1月9日）</a>
     </div>
 </div>
+</div>
 
-<!-- 校友录弹窗 -->
+<div class="box"><div class="box-tit" id="tit2">每日纪事</div>
+<ul class="list">
+<li><a onclick="showArticle(0)">卷卷复合肥总经理受贿事发，依法遭重罚</a></li>
+<li><a onclick="showArticle(1)">卷市股票大跌，是蓄谋已久的阴谋，还是新时代的必然结果</a></li>
+<li><a onclick="showArticle(2)">知名历史学家张真武因病去世，享年89岁</a></li>
+<li><a onclick="showArticle(3)">伦敦千禧穹顶开幕，全球倒计时直播，“千年虫”问题有惊无险</a></li>
+<li><a onclick="showArticle(4)">阿萨姆花卷当选卷国总统，开启长期执政</a></li>
+<li><a onclick="showArticle(5)">学生对食品的要求日益增高，营养学家李德明的看法</a></li>
+</ul>
+</div>
+
+<div class="box"><div class="box-tit" id="tit3">🎯 校园互动区</div>
+<div style="padding:10px;line-height:1.8;">
+<div style="margin-bottom:6px;">👉 <b>今日热门投票</b></div>
+<div style="font-size:13px;color:#00c;cursor:pointer;" onclick="alert('你投了：食堂饭菜优化')">• 食堂饭菜优化建议</div>
+<div style="font-size:13px;color:#00c;cursor:pointer;" onclick="alert('你投了：增加课外活动')">• 增加课外活动时间</div>
+<div style="font-size:13px;color:#00c;cursor:pointer;" onclick="alert('你投了：改善校园设施')">• 改善校园设施</div>
+<div style="margin-top:8px;font-size:12px;color:#666;">已有 128 人参与 | <span style="color:#008000;cursor:pointer;" onclick="showArticle(5)">查看最新营养建议</span></div>
+</div>
+</div>
+
+<div class="box"><div class="box-tit" id="tit4">⏰ 校园今日提醒</div>
+<div style="padding:10px;font-size:13px;line-height:1.8;">
+<div>• 9月13日 班级卫生检查</div>
+<div>• 9月14日 操场运动会彩排</div>
+<div>• 9月15日 月考时间公布</div>
+<div style="color:#c00;margin-top:4px;">⚠ 食堂食材抽检中，请注意饮食安全</div>
+</div>
+</div>
+</div>
+
+<div class="right">
+<div class="box"><div class="box-tit" id="loginTitle">🔐 密码登录入口</div>
+<div class="login-body">
+<div class="login-item"><label>账号：</label><input type="text" id="user"></div>
+<div class="login-item"><label>密码：</label><input type="password" id="pwd"></div>
+<div class="radio-box">
+    <input type="radio" name="login" checked><label>学生登陆</label><br>
+    <input type="radio" name="login"><label>教师登陆</label>
+</div>
+<div class="btn-group">
+    <button class="btn" onclick="checkLogin()">验证密码</button>
+    <button class="btn" onclick="resetInput()">重置输入</button>
+</div>
+<div style="margin-top:10px;font-size:12px;color:#006600;">👥 当前在线：46 人</div>
+<button class="btn" style="width:100%;margin-top:8px;background:#006600;" onclick="alert('✅ 签到成功！获得论坛积分 +10')">每日签到</button>
+</div>
+</div>
+
+<div class="ad-box beer-ad" id="ad1">
+<h3>花卷牌啤酒</h3>
+<p>优品小麦酿造 老牌风味</p>
+<p>清爽麦香 欢聚必备</p>
+<p>加盟热线：9931200122</p>
+</div>
+
+<div class="ad-box ring-ad" id="ad2">
+<h3>火爆免费彩铃</h3>
+<p>03年热门金曲 一键订购</p>
+<p>点播专线：8866521</p>
+<p>炫酷铃声抢先体验</p>
+</div>
+
+<div class="box"><div class="box-tit" id="tit5">论坛热搜</div>
+<ul class="hot-list">
+<li><a onclick="showArticle(6)">熊牌公司猪肉抗生素超标</a></li>
+<li><a onclick="showArticle(7)">央视起底宠物神药黑幕</a></li>
+<li><a onclick="showArticle(8)">蚊子的鸿门宴来了</a></li>
+<li><a onclick="showArticle(9)">好学生成休学主力军</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- 校友录弹窗（已新增6位校友） -->
 <div class="alumni-pop" id="alumniBox">
-    <h3>🌟 优秀校友：徐明泽</h3>
-    <!-- 直接嵌入你这张照片链接 -->
-    <img class="alumni-img" src="https://p3-flow-image-sign.byteimg.com/tos-cn-i-a9rns2rl98/33100030003c400899d7d40003000303~tplv-a9rns2rl98-image.image">
-    <div class="alumni-comment">
-        <div class="floor">
-            <span class="user">十一中学老校长</span>：徐明泽同学是我校杰出校友，在校期间成绩优异、品行端正，是学弟学妹的榜样。
-        </div>
-        <div class="floor">
-            <span class="user">03届老学长</span>：明泽为人正直靠谱，毕业后事业有成，一直心系母校，经常回校看望老师。
-        </div>
-        <div class="floor">
-            <span class="user">匿名校友</span>：希望我们十一中学能走出更多像徐明泽一样优秀的人才！
-        </div>
-    </div>
-    <button class="close" onclick="closeAlumni()">关闭</button>
+<h3>🌟 优秀校友：徐明泽</h3>
+<img class="alumni-img" id="alumniImg" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgZmlsbD0iI2YxYzljOCI+PC9zdmc+">
+<div class="alumni-comment">
+<div class="floor"><span class="user">十一中学老校长</span>：徐明泽同学是我校杰出校友，在校期间成绩优异、品行端正，是学弟学妹的榜样。</div>
+<div class="floor"><span class="user">03届老学长</span>：明泽为人正直靠谱，毕业后事业有成，一直心系母校，经常回校看望老师。</div>
+<div class="floor"><span class="user">匿名校友</span>：希望我们十一中学能走出更多像徐明泽一样优秀的人才！</div>
+
+<div class="floor"><span class="user">李佳鑫</span>：勤奋踏实，成绩稳居年级前列，热心班级事务，多次获评三好学生，是同学们学习的标杆。</div>
+<div class="floor"><span class="user">朱梓童</span>：品学兼优，文艺骨干，待人真诚友善，积极参与校园活动，用行动传递正能量。</div>
+<div class="floor"><span class="user">范成真</span>：严谨自律，思维敏捷，理科成绩突出，乐于助人，深受师生好评。</div>
+<div class="floor"><span class="user">王金祥</span>：稳重踏实，责任心强，热爱集体，学习刻苦，综合素质全面发展。</div>
+<div class="floor"><span class="user">刘浩俊</span>：乐观向上，积极进取，运动与学习兼顾，团结同学，是校园里的阳光榜样。</div>
+<div class="floor"><span class="user">许智斌</span>：认真踏实，待人温和，遵守校规校纪，勤奋上进，在校表现始终优秀。</div>
+
+</div>
+<button class="close" onclick="closeAlumni()">关闭</button>
 </div>
 
-<!-- 贴吧弹窗 -->
 <div class="tieba-pop" id="tiebaBox"></div>
-<!-- 文章弹窗 -->
 <div class="article-pop" id="articleBox">
-    <h3 id="artTitle"></h3>
-    <img id="artImg" src="">
-    <p id="artText"></p>
-    <button class="close" onclick="document.getElementById('articleBox').style.display='none'">关闭</button>
+<h3 id="artTitle"></h3>
+<img id="artImg" src="">
+<p id="artText"></p>
+<button class="close" onclick="closeAll()">关闭</button>
 </div>
 
 <script>
-// 登录
+function openMail(){document.getElementById('mailWin').style.display='block';}
+function closeMail(){document.getElementById('mailWin').style.display='none';}
+function closeMailBox(){document.getElementById('mailBox').style.display='none';}
+function checkMailLogin(){
+    const u=document.getElementById('mailUser').value.trim();
+    const p=document.getElementById('mailPwd').value.trim();
+    if(u==='11school@cyhj.com'&&p==='888888'){closeMail();document.getElementById('mailBox').style.display='block';}
+    else if(u==='20030109'&&p==='xuzhibin'){alert('邮箱登录成功！收到密件：主站账号=20030109，密码=congyouhuajuan');closeMail();}
+    else{alert('校内邮箱账号或密码错误，请使用学校格式');}
+}
+function openNews(){document.getElementById('newsWin').style.display='block';}
+function closeNews(){document.getElementById('newsWin').style.display='none';}
+function closeDiary(){document.getElementById('diaryPop').style.display='none';document.getElementById('mask').style.display='none';}
+function closeLeave(){document.getElementById('leavePop').style.display='none';document.getElementById('mask').style.display='none';}
+function doSearch(){
+    const kw=document.getElementById('keyword').value.trim();
+    if(!kw){alert("请输入关键词");return;}
+    if(kw==="日记"){document.getElementById('diaryPop').style.display='block';document.getElementById('mask').style.display='block';return;}
+    if(kw==="请假"){document.getElementById('leavePop').style.display='block';document.getElementById('mask').style.display='block';return;}
+    const clues={"密码":"线索：密码来自一位用户的名字拼音","账号":"线索：账号是年份+月份日期","葱油花卷":"线索：congyouhuajuan → 这是登录密码","2003":"线索：2003是论坛创始年，账号开头","花卷":"线索：密码就藏在这个名字里","食堂":"线索：食堂异常与供应商肥料有关","李德明":"线索：营养学家揭露了食材真相","卷卷":"线索：卷卷复合肥是事件核心","复合肥":"线索：劣质肥料导致食材不安全"};
+    clues[kw]?alert("🔍 找到线索：\n"+clues[kw]):alert("未找到相关线索，请尝试其他关键词");
+}
 function checkLogin(){
-    const u=document.getElementById('user').value;
-    const p=document.getElementById('pwd').value;
-    if(u==='20030109'&&p==='congyouhuajuan')alert("登录成功，欢迎进入十一中学学生中心");
-    else alert("账号或密码错误，请重新输入");
+    const u=document.getElementById('user').value,p=document.getElementById('pwd').value;
+    if(u==='20030109'&&p==='congyouhuajuan'){document.getElementById('msgBox').style.display='block';document.getElementById('searchBar').style.display='block';showMask();}
+    else{alert("账号或密码错误，请重新输入");}
 }
-
-// 校友录弹窗 新增JS
-function openAlumni(){
-    document.getElementById('alumniBox').style.display='block';
+function closeMsg(){
+    document.getElementById('msgBox').style.display='none';closeAll();
+    document.querySelectorAll('.top-bar,.box-tit,.btn,.msg-title,.article-pop,.alumni-pop,.close').forEach(el=>{el.style.background='#8B0000';el.style.borderColor='#8B0000';});
+    document.querySelectorAll('.banner').forEach(el=>{el.style.background='#FFC0C0';});
+    document.querySelectorAll('.article a,.list a,.sub-nav-item').forEach(el=>{el.style.color='#CC0000';});
+    document.querySelector('.search-bar button').style.background='#8B0000';
+    document.getElementById('bannerText').style.display='none';
+    document.getElementById('zhouyu').style.display='block';
+    document.getElementById('loginTitle').innerText='✅ 认证成功！';
+    document.getElementById('loginTitle').style.color='#FF0000';
+    document.getElementById('loginTitle').style.fontWeight='bold';
+    document.getElementById('ad1').innerHTML = '<h3>你想知道什麼</h3>';
+    document.getElementById('ad1').style.color = '#FF0000';
+    document.getElementById('ad1').style.fontSize = '16px';
+    document.getElementById('ad1').style.fontWeight = 'bold';
+    document.getElementById('ad2').innerHTML = '<h3>你想知道什麼</h3>';
+    document.getElementById('ad2').style.color = '#FF0000';
+    document.getElementById('ad2').style.fontSize = '16px';
+    document.getElementById('ad2').style.fontWeight = 'bold';
+    document.getElementById('tit1').innerText = '䰸魊魑䰫';
+    document.getElementById('tit2').innerText = '魙䰶䰡䰲';
+    document.getElementById('tit3').innerText = '䰴䰷䰺䰻';
+    document.getElementById('tit4').innerText = '䰽䱀䱂䱆';
+    document.getElementById('tit5').innerText = '䱇䱈䱉䱊';
+    document.getElementById('tit1').style.color='#FF0000';
+    document.getElementById('tit2').style.color='#FF0000';
+    document.getElementById('tit3').style.color='#FF0000';
+    document.getElementById('tit4').style.color='#FF0000';
+    document.getElementById('tit5').style.color='#FF0000';
+    document.body.classList.add('shake');
+    document.getElementById('alumniImg').src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgZmlsbD0iIzExMSIvPgo8cG9seWdvbiBwb2ludHM9IjUwLDIwMCA5MCwxMjAgNzAsMTIwIDkwLDQwIDcwLDQwIDEzMCwyMDAiIGZpbGw9IiMyMjIiLz48cG9seWdvbiBwb2ludHM9IjEyMCwyMDAgMTUwLDEzMCAxMzAsMTMwIDE1MCw2MCAxMzAsNjAgMTgwLDIwMCIgZmlsbD0iIzIyMiIvPjwvc3ZnPg==";
+    document.getElementById('campusImg').src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzExMSIvPgo8cG9seWdvbiBwb2ludHM9IjIwLDEwMCA0MCw1MCAzMCw1MCA0MCwyMCAzMCwyMCA2MCwxMDAiIGZpbGw9IiMyMjIiLz48cG9seWdvbiBwb2ludHM9IjYwLDEwMCA4MCw2MCAzMCw2MCA0MCwxMDAiIGZpbGw9IiMyMjIiLz48L3N2Zz4=";
 }
-function closeAlumni(){
+function resetInput(){document.getElementById('user').value='';document.getElementById('pwd').value='';}
+function showMask(){document.getElementById('mask').style.display='block';}
+function closeAll(){
     document.getElementById('alumniBox').style.display='none';
+    document.getElementById('tiebaBox').style.display='none';
+    document.getElementById('articleBox').style.display='none';
+    document.getElementById('msgBox').style.display='none';
+    document.getElementById('mask').style.display='none';
 }
+function openAlumni(){document.getElementById('alumniBox').style.display='block';showMask();}
+function closeAlumni(){document.getElementById('alumniBox').style.display='none';closeAll();}
 
-// ========== 上面3个：2003诡异贴吧 ==========
 const tiebas = [
-{
-    title:"精品：【风轻云淡】：听取大家的意见 我们共同促进校园食品健康 保证校园收费透明化 大家可以吃的放心…",
-    floors:[
-        {u:"风轻云淡",t:"2003-09-12 21:14",txt:"大家可以积极踊跃提出一些对学校饭菜的不满。"},
-        {u:"猴王why",t:"2003-09-12 21:16",txt:"不知道大家有没有觉得学校的肉会有一股很奇怪的馊味，真的觉得不太好吃。"},
-        {u:"黑黑的胳膊肘",t:"2003-09-12 21:18",txt:"食堂饭菜还总有股淡淡的铁锈味..."},
-        {u:"疯狂小子雅各",t:"2003-09-12 21:20",txt:"对对，特别是包子里的肉馅，有一股酸味。"},
-        {u:"讨厌五仁月饼",t:"2003-09-12 21:22",txt:"是三号窗口吧，那家早饭肉饼一股怪味不说，中午的母鸡汤喝了总拉肚子。"},
-        {u:"葱油花卷",t:"2003-09-12 21:24",txt:"你们最近看学校的报刊了吗，好像不是学校的问题，供应商出问题了。"},
-        {u:"快枪手老刘",t:"2003-09-12 21:26",txt:"楼上，是李明德那一期吗，很多肉都不新鲜，还被很多不知情的学校大批量购买。"},
-        {u:"林家少爷",t:"2003-09-12 21:28",txt:"你是说不止我们学校的肉不新鲜吗？"},
-        {u:"快枪手老刘",t:"2003-09-12 21:30",txt:"是啊，我一个朋友在四中上学，那边的肉也是最近味道变得很怪，牛肉不像牛肉，猪肉不像猪肉。"},
-        {u:"猛干十碗饭",t:"2003-09-12 21:32",txt:"天呐，该不会是学校没钱了吧，买些劣质肉糊弄我们来了。"},
-        {u:"油条配蛋",t:"2003-09-12 21:34",txt:"不会吧，一年学费那么贵，他哪里缺钱了，学校设施几年都没翻新了。"},
-        {u:"楼道回声",t:"2003-09-12 21:36",txt:"楼上你还真敢说，你不怕被学校看到了。"},
-        {u:"油条配蛋",t:"2003-09-12 21:38",txt:"那有啥害怕的，学校自己做的亏心事，他们自知之明，揣着明白装糊涂。"},
-        {u:"楼道回声",t:"2003-09-12 21:40",txt:"此消息已被楼主屏蔽"},
-        {u:"油条配蛋",t:"2003-09-12 21:42",txt:"啊？还有这事，那位同学怎么样了。"},
-        {u:"楼道回声",t:"2003-09-12 21:44",txt:"不知道啊，估计是被劝退了，我们已经好久都没联系了。"},
-        {u:"林家少爷",t:"2003-09-12 21:46",txt:"他我们班的，人挺好就是脾气太冲了，有时候老师说他几句，他都敢顶好几句嘴。"},
-        {u:"巧克力牛奶棒冰",t:"2003-09-12 21:48",txt:"是那个留寸头的男生吗，他确实有点横了，之前和我们班大哥大打了次架留处分了。"},
-        {u:"林家少爷",t:"2003-09-12 21:50",txt:"对对，和我们班sxw打起来了，听说鼻梁都断了。"},
-        {u:"牛肉粒",t:"2003-09-12 21:52",txt:"我的天哪，上次考试他坐在我前面，这么一想好恐怖，他好像还纹身了。"},
-        {u:"风轻云淡",t:"2003-09-12 21:54",txt:"请大家不要聊与话题无关的东西。"},
-    ]
-},
-{
-    title:"【爱吃玉米123】：笃行楼谁捡到了一张水卡，上面贴有叮当猫…",
-    floors:[
-        {u:"爱吃玉米123",t:"2003-09-12 21:55",txt:"本人饭卡在今天中午在食堂不小心弄丢了，很着急，一天没喝水。"},
-        {u:"牛肉粒",t:"2003-09-12 21:57",txt:"你是哪个班的，可以多留点线索吗。"},
-        {u:"爱吃玉米123",t:"2003-09-12 21:59",txt:"是比较老型号的饭卡，一月份办的吧，我是高三学生。"},
-        {u:"快枪手老刘",t:"2003-09-12 22:01",txt:"是不是后面还有海绵宝宝的贴纸？。"},
-        {u:"爱吃玉米123",t:"2003-09-12 22:03",txt:"对对对，你有见到过吗同学。"},
-        {u:"快枪手老刘",t:"2003-09-12 22:05",txt:"我下午体育课买水的时候好像看到了，是我前面一个男生在用。"},
-        {u:"爱吃玉米123",t:"2003-09-12 22:07",txt:"啊...好糟糕。"},
-        {u:"葱油花卷",t:"2003-09-12 22:09",txt:"我也见到了，当时在饭桌上，但我没理会，只是有个印象。"},
-        {u:"巧克力牛奶棒冰",t:"2003-09-12 22:11",txt:"学校没有监控吗，看看能不能调查一下是谁拿的。"},
-        {u:"油条配蛋",t:"2003-09-12 22:13",txt:"这破学校能给你按监控吗，估计在门口撒泡尿他都不知道是谁干的。"},
-        {u:"巧克力牛奶棒冰",t:"2003-09-12 22:15",txt:"这么说也是哈哈哈哈。"},
-        {u:"葱油花卷",t:"2003-09-12 22:17",txt:"估计是低年级的同学吧，也不太懂这些规矩。"},
-        {u:"爱吃玉米123",t:"2003-09-12 22:19",txt:"不知道呢，唉，真倒霉。"},
-        {u:"葱油花卷",t:"2003-09-12 22:21",txt:"或者你可以先用我的水卡。"},
-        {u:"爱吃玉米123",t:"2003-09-12 22:23",txt:"真的吗？太谢谢你了同学。"},
-        {u:"楼道回声",t:"2003-09-12 22:25",txt:"现在小偷是真多啊，一不留神自己的东西就没了。"},
-        {u:"讨厌五仁月饼",t:"2003-09-12 22:27",txt:"是呢，不只有偷这些小物件的，还有偷衣物的。"},
-        {u:"猛干十万饭",t:"2003-09-12 22:29",txt:"妈呀，好恐怖。"},
-        {u:"疯狂小子雅各",t:"2003-09-12 22:31",txt:"楼主我好像认识拿你饭卡的人【该消息已被折叠】。"},
-        {u:"爱吃玉米123",t:"2003-09-12 22:33",txt:"啊？我认识他，他人挺好的吧，挺干净的一个人。"},
-        {u:"疯狂小子雅各",t:"2003-09-12 22:35",txt:"人不能貌相啊同学。"},
-    ]
-},
-{
-    title:"【疯狂小子雅各】：话说有人听说sxw事件吗？我想趁晚上没人听一下…",
-    floors:[
-        {u:"疯狂小子雅各",t:"2003-09-12 22:36",txt:"sxw是我一个哥们，之前和我都是三班的，去年转学了。"},
-        {u:"楼道回声",t:"2003-09-12 22:38",txt:"我认识他，他怎么了。"},
-        {u:"疯狂小子雅各",t:"2003-09-12 22:40",txt:"他之前和别的班的学生打架斗殴，把人家鼻子打断了，家里又没钱赔付。"},
-        {u:"楼道回声",t:"2003-09-12 22:42",txt:"这么恐怖？他还有这事呢。"},
-        {u:"疯狂小子雅各",t:"2003-09-12 22:44",txt:"不止这一件，他好像没有在读了，出生社会以后就没啥消息了。"},
-        {u:"楼道回声",t:"2003-09-12 22:46",txt:"别卖关子啦兄弟，快快讲明白。"},
-        {u:"疯狂小子雅各",t:"2003-09-12 22:48",txt:"他偷东西，之前被关进少管所里，但是平日对我们又很好，唯独就是脾气爆了点。"},
-        {u:"楼道回声",t:"2003-09-12 22:50",txt:"这种人你还是别和他贴得太近了，他说不定有啥目的呢。"},
-        {u:"讨厌五仁月饼",t:"2003-09-12 22:52",txt:"人真的不能貌相啊。"},
-        {u:"猛干五碗饭",t:"2003-09-12 22:54",txt:"是啊，万一对你图谋不轨，可能是在装样子呢。"},
-        {u:"葱油花卷",t:"2003-09-12 22:56",txt:"和我们班的人打起来了，那天我们班那个学生的爸爸在楼道里怒喊他们班主任的名字。"},
-        {u:"鸡米花",t:"2003-09-12 22:58",txt:"这也太恐怖了吧，还有其他爆料吗。"},
-        {u:"tigerboy",t:"2003-09-12 23:00",txt:"【此消息因违反论坛要求，已被删除】"},
-        {u:"悔悔饿了",t:"2003-09-12 23:02",txt:"？楼上发了什么。"},
-        {u:"油条配蛋",t:"2003-09-12 23:04",txt:"楼主好像好久都没消息了，怎么不说话了。"},
-        {u:"悔悔饿了",t:"2003-09-12 23:06",txt:"我也认识这个人，他和我借过钱来着，走了之后都没还。"},
-        {u:"爱吃玉米123",t:"2003-09-12 23:08",txt:"话说他应该看不到我们的论坛在讨论他吧。"},
-        {u:"鸡米花",t:"2003-09-12 23:10",txt:"大概没啥事，估计他都不知道有论坛这个东西。"},
-        {u:"油条配蛋",t:"2003-09-12 23:12",txt:"楼主睡着了吗，蹲后续。"},
-        {u:"疯狂小子雅各",t:"2003-09-12 23:14",txt:"我在操场西北角，我得悄悄说，不能明说这些事。"},
-        {u:"油条配蛋",t:"2003-09-12 23:16",txt:"唉..好扫兴。"},
-    ]
-}
+{"title":"精品：【风轻云淡】：听取大家的意见 我们共同促进校园食品健康 保证校园收费透明化 大家可以吃的放心…","floors":[
+{"u":"风轻云淡","t":"2003-09-12 21:14","txt":"大家可以积极踊跃提出一些对学校饭菜的不满。"},
+{"u":"猴王why","t":"2003-09-12 21:16","txt":"不知道大家有没有觉得学校的肉会有一股很奇怪的馊味，真的觉得不太好吃。"},
+{"u":"黑黑的胳膊肘","t":"2003-09-12 21:18","txt":"食堂饭菜还总有股淡淡的铁锈味..."},
+{"u":"疯狂小子雅各","t":"2003-09-12 21:20","txt":"对对，特别是包子里的肉馅，有一股酸味。"},
+{"u":"讨厌五仁月饼","t":"2003-09-12 21:22","txt":"是三号窗口吧，那家早饭肉饼一股怪味不说，中午的母鸡汤喝了总拉肚子。"},
+{"u":"葱油花卷","t":"2003-09-12 21:24","txt":"你们最近看学校的报刊了吗，好像不是学校的问题，供应商出问题了。"},
+{"u":"快枪手老刘","t":"2003-09-12 21:26","txt":"楼上，是李明德那一期吗，很多肉都不新鲜，还被很多不知情的学校大批量购买。"},
+{"u":"林家少爷","t":"2003-09-12 21:28","txt":"你是说不止我们学校的肉不新鲜吗？"},
+{"u":"快枪手老刘","t":"2003-09-12 21:30","txt":"是啊，我一个朋友在四中上学，那边的肉也是最近味道变得很怪，牛肉不像牛肉，猪肉不像猪肉。"},
+{"u":"猛干十碗饭","t":"2003-09-12 21:32","txt":"天呐，该不会是学校没钱了吧，买些劣质肉糊弄我们来了。"},
+{"u":"油条配蛋","t":"2003-09-12 21:34","txt":"不会吧，一年学费那么贵，他哪里缺钱了，学校设施几年都没翻新了。"},
+{"u":"楼道回声","t":"2003-09-12 21:36","txt":"楼上你还真敢说，你不怕被学校看到了。"},
+{"u":"油条配蛋","t":"2003-09-12 21:38","txt":"那有啥害怕的，学校自己做的亏心事，他们自知之明，揣着明白装糊涂。"},
+{"u":"楼道回声","t":"2003-09-12 21:40","txt":"此消息已被楼主屏蔽"},
+{"u":"油条配蛋","t":"2003-09-12 21:42","txt":"啊？还有这事，那位同学怎么样了。"},
+{"u":"楼道回声","t":"2003-09-12 21:44","txt":"不知道啊，估计是被劝退了，我们已经好久都没联系了。"},
+{"u":"林家少爷","t":"2003-09-12 21:46","txt":"他我们班的，人挺好就是脾气太冲了，有时候老师说他几句，他都敢顶好几句嘴。"},
+{"u":"巧克力牛奶棒冰","t":"2003-09-12 21:48","txt":"是那个留寸头的男生吗，他确实有点横了，之前和我们班大哥大打了次架留处分了。"},
+{"u":"林家少爷","t":"2003-09-12 21:50","txt":"对对，和我们班sxw打起来了，听说鼻梁都断了。"},
+{"u":"牛肉粒","t":"2003-09-12 21:52","txt":"我的天哪，上次考试他坐在我前面，这么一想好恐怖，他好像还纹身了。"},
+{"u":"风轻云淡","t":"2003-09-12 21:54","txt":"请大家不要聊与话题无关的东西。"}
+]},
+{"title":"【爱吃玉米123】：笃行楼谁捡到了一张水卡，上面贴有叮当猫…","floors":[
+{"u":"爱吃玉米123","t":"2003-09-12 21:55","txt":"本人饭卡在今天中午在食堂不小心弄丢了，很着急，一天没喝水。"},
+{"u":"牛肉粒","t":"2003-09-12 21:57","txt":"你是哪个班的，可以多留点线索吗。"},
+{"u":"爱吃玉米123","t":"2003-09-12 21:59","txt":"是比较老型号的饭卡，一月份办的吧，我是高三学生。"},
+{"u":"快枪手老刘","t":"2003-09-12 22:01","txt":"是不是后面还有海绵宝宝的贴纸？。"},
+{"u":"爱吃玉米123","t":"2003-09-12 22:03","txt":"对对对，你有见到过吗同学。"},
+{"u":"快枪手老刘","t":"2003-09-12 22:05","txt":"我下午体育课买水的时候好像看到了，是我前面一个男生在用。"},
+{"u":"爱吃玉米123","t":"2003-09-12 22:07","txt":"啊...好糟糕。"},
+{"u":"葱油花卷","t":"2003-09-12 22:09","txt":"我也见到了，当时在饭桌上，但我没理会，只是有个印象。"},
+{"u":"巧克力牛奶棒冰","t":"2003-09-12 22:11","txt":"学校没有监控吗，看看能不能调查一下是谁拿的。"},
+{"u":"油条配蛋","t":"2003-09-12 22:13","txt":"这破学校能给你按监控吗，估计在门口撒泡尿他都不知道是谁干的。"},
+{"u":"巧克力牛奶棒冰","t":"2003-09-12 22:15","txt":"这么说也是哈哈哈哈。"},
+{"u":"葱油花卷","t":"2003-09-12 22:17","txt":"估计是低年级的同学吧，也不太懂这些规矩。"},
+{"u":"爱吃玉米123","t":"2003-09-12 22:19","txt":"不知道呢，唉，真倒霉。"},
+{"u":"葱油花卷","t":"2003-09-12 22:21","txt":"或者你可以先用我的水卡。"},
+{"u":"爱吃玉米123","t":"2003-09-12 22:23","txt":"真的吗？太谢谢你了同学。"},
+{"u":"楼道回声","t":"2003-09-12 22:25","txt":"现在小偷是真多啊，一不留神自己的东西就没了。"},
+{"u":"讨厌五仁月饼","t":"2003-09-12 22:27","txt":"是呢，不只有偷这些小物件的，还有偷衣物的。"},
+{"u":"猛干十万饭","t":"2003-09-12 22:29","txt":"妈呀，好恐怖。"},
+{"u":"疯狂小子雅各","t":"2003-09-12 22:31","txt":"楼主我好像认识拿你饭卡的人【该消息已被折叠】。"},
+{"u":"爱吃玉米123","t":"2003-09-12 22:33","txt":"啊？我认识他，他人挺好的吧，挺干净的一个人。"},
+{"u":"疯狂小子雅各","t":"2003-09-12 22:35","txt":"人不能貌相啊同学。"}
+]},
+{"title":"【疯狂小子雅各】：话说有人听说sxw事件吗？我想趁晚上没人听一下…","floors":[
+{"u":"疯狂小子雅各","t":"2003-09-12 22:36","txt":"sxw是我一个哥们，之前和我都是三班的，去年转学了。"},
+{"u":"楼道回声","t":"2003-09-12 22:38","txt":"我认识他，他怎么了。"},
+{"u":"疯狂小子雅各","t":"2003-09-12 22:40","txt":"他之前和别的班的学生打架斗殴，把人家鼻子打断了，家里又没钱赔付。"},
+{"u":"楼道回声","t":"2003-09-12 22:42","txt":"这么恐怖？他还有这事呢。"},
+{"u":"疯狂小子雅各","t":"2003-09-12 22:44","txt":"不止这一件，他好像没有在读了，出生社会以后就没啥消息了。"},
+{"u":"楼道 echo","t":"2003-09-12 22:46","txt":"别卖关子啦兄弟，快快讲明白。"},
+{"u":"疯狂小子雅各","t":"2003-09-12 22:48","txt":"他偷东西，之前被关进少管所里，但是平日对我们又很好，唯独就是脾气爆了点。"},
+{"u":"楼道回声","t":"2003-09-12 22:50","txt":"这种人你还是别和他贴得太近了，他说不定有啥目的呢。"},
+{"u":"讨厌五仁月饼","t":"2003-09-12 22:52","txt":"人真的不能貌相啊。"},
+{"u":"猛干五碗饭","t":"2003-09-12 22:54","txt":"是啊，万一对你图谋不轨，可能是在装样子呢。"},
+{"u":"葱油花卷","t":"2003-09-12 22:56","txt":"和我们班的人打起来了，那天我们班那个学生的爸爸在楼道里怒喊他们班主任的名字。"},
+{"u":"鸡米花","t":"2003-09-12 22:58","txt":"这也太恐怖了吧，还有其他爆料吗。"},
+{"u":"tigerboy","t":"2003-09-12 23:00","txt":"【此消息因违反论坛要求，已被删除】"},
+{"u":"悔悔饿了","t":"2003-09-12 23:02","txt":"？楼上发了什么。"},
+{"u":"油条配蛋","t":"2003-09-12 23:04","txt":"楼主好像好久都没消息了，怎么不说话了。"},
+{"u":"悔悔饿了","t":"2003-09-12 23:06","txt":"我也认识这个人，他和我借过钱来着，走了之后都没还。"},
+{"u":"爱吃玉米123","t":"2003-09-12 23:08","txt":"话说他应该看不到我们的论坛在讨论他吧。"},
+{"u":"鸡米花","t":"2003-09-12 23:10","txt":"大概没啥事，估计他都不知道有论坛这个东西。"},
+{"u":"油条配蛋","t":"2003-09-12 23:12","txt":"楼主睡着了吗，蹲后续。"},
+{"u":"疯狂小子雅各","t":"2003-09-12 23:14","txt":"我在操场西北角，我得悄悄说，不能明说这些事。"},
+{"u":"油条配蛋","t":"2003-09-12 23:16","txt":"唉..好扫兴。"}
+]},
+{"title":"精品：【葱油花卷】：校内邮箱使用教学","floors":[
+{"u":"葱油花卷","t":"2002-01-09 08:30","txt":"本贴为新生提供校内邮箱的使用教学。若想以访客邮箱进入学校官网邮箱，可使用11school@cyhj.com进行登录，密码为888888。切记只需用于学习，不能商用。"}
+]}
+];
+
+const articles=[
+{"title":"卷卷复合肥总经理受贿事发，依法遭重罚","text":"近日，卷卷复合肥集团总经理因长期利用职务便利收受贿赂、违规挪用企业资金，被司法机关立案查处，案件引发当地市场与农业行业广泛关注。经调查，该负责人在原料采购、经销商合作、项目招标等环节多次收受巨额好处费，为合作方提供不正当便利，严重扰乱农资市场公平秩序。随着案件细节公开，公众意识到大型农资企业腐败对农户利益、粮食安全的潜在危害。此次查处不仅是对个人违法行为的惩戒，也为行业敲响警钟。监管部门表示，将持续加强农资领域反腐力度，完善企业内控与外部监督机制，守护农业市场健康发展，维护广大农户的切身利益。"},
+{"title":"卷市股票大跌，是蓄谋已久的阴谋，还是新时代的必然结果","text":"近期卷市股市出现断崖式下跌，多支权重股连续多日走低，投资者恐慌情绪蔓延，市场围绕下跌原因展开激烈讨论。有人认为背后存在资本恶意做空、内部操盘等人为阴谋，利用信息差收割散户；也有观点指出，这是经济转型、产业调整带来的必然结果。从宏观层面看，传统产业增长放缓、新兴行业竞争加剧、外部环境波动，共同冲击市场信心。同时散户投资不理性、跟风投机，放大了市场震荡。此次大跌既是风险释放，也是市场自我调整。无论是否存在人为干预，都提醒投资者理性看待波动，监管层面也需完善制度，防范恶意操控，稳定资本市场秩序。"},
+{"title":"知名历史学家张真武因病去世，享年89岁","text":"我国知名历史学家张真武先生因病逝世，享年89岁，学界与社会各界深切缅怀。张真武深耕近现代史研究六十余年，治学严谨，著作等身，聚焦地方史、民间史料、近代社会变迁，挖掘大量一手档案，填补多项学术空白。他一生淡泊名利，常年奔走各地收集口述史料与民间文献，致力于历史知识普及，多次走进校园开展讲座，鼓励青年正视历史、理性思考。其严谨的治学态度与人文情怀，影响了几代历史爱好者。先生的离世是史学界重大损失，但他留下的研究成果与精神财富，将长久激励后人继续探索历史、传承文化。"},
+{"title":"伦敦千禧穹顶开幕，全球倒计时直播，“千年虫”问题有惊无险","text":"千禧年到来之际，伦敦千禧穹顶正式盛大开幕，全球多国同步开启跨世纪倒计时直播，成为世纪之交标志性盛事。此前全世界高度紧张的“千年虫”危机，最终有惊无险平稳度过。千年虫源于早期计算机年份仅用两位数字存储，人们担忧系统崩溃、金融瘫痪、交通失控。各国提前数年开展排查、升级、测试，投入海量人力物力。跨年当晚，全球系统平稳运行，危机解除。千禧穹顶的狂欢与千年虫的化解，见证人类迈入新世纪，既展现科技进步的力量，也让人们重视信息安全，为后续数字时代发展积累宝贵经验。"},
+{"title":"阿萨姆花卷当选卷国总统，开启长期执政","text":"经过全民大选，阿萨姆花卷成功当选卷国新一任总统，开启长期执政时代，国内舆论对此褒贬不一。阿萨姆花卷以务实亲民的竞选理念获得大量底层民众支持，承诺改善民生、稳定物价、完善公共服务，同时推进对外友好交流。反对派则担忧长期执政模式会弱化监督，影响民主活力。上任之初，新总统便推出一系列惠民政策，优先解决就业、教育、医疗难题，获得初步认可。国际社会密切关注卷国政策走向，期待该国在新领导下实现稳定发展。此次大选，也成为卷国近代政治进程中的重要转折点。"},
+{"title":"学生对食品的要求日益增高，营养学家李德明的看法","text":"如今青少年学生群体对日常饮食、校园食堂食品的要求越来越高，不再只追求饱腹，更加关注安全、营养、口味与健康。针对这一趋势，知名营养学家李德明发表专业看法，引发校园与家长广泛共鸣。李德明表示，学生处于身体发育关键阶段，合理膳食至关重要。校园食品必须严控食材安全，拒绝添加剂超标、劣质原料；同时要兼顾营养均衡，搭配蛋白质、维生素、膳食纤维。他建议学校优化食堂菜品，减少重油重盐，定期公示食材来源。同时提醒学生拒绝垃圾食品，养成健康饮食习惯，家校共同发力，守护青少年健康成长。"},
+{"title":"熊牌公司猪肉抗生素超标","text":"近期市场监管部门抽检发现，知名肉类企业熊牌公司生产的猪肉产品抗生素严重超标，相关批次已紧急下架封存，引发消费者强烈担忧。经检测，该企业养殖环节违规大量使用抗生素，用于加快生猪生长、预防疫病，长期食用残留超标的肉类，会损害人体免疫力，诱导耐药菌产生，危害健康。事件曝光后，监管部门依法对企业立案处罚，责令整改、召回问题产品。熊牌公司公开致歉，承认养殖管理存在漏洞。此次事件再次敲响食品安全警钟，消费者呼吁加强养殖源头监管，严厉打击违规用药行为，守护餐桌安全。"},
+{"title":"央视起底宠物神药黑幕","text":"央视深度调查曝光宠物行业“神药”黑幕，大量三无兽药、违规药品在电商、宠物店流通，不少产品无正规批号、成分不明，却被包装成特效神药，坑害宠物与饲养者。调查发现，部分商家将人用禁药、过期药简单分装，虚假宣传能治百病，宠物使用后极易中毒、器官受损。宠物医疗乱象背后，是行业监管薄弱、准入门槛低、信息不透明。许多养宠家庭缺乏辨别能力，盲目相信网红爆款兽药。此次曝光推动相关部门开展专项整治，严厉打击违规生产销售行为，完善宠物药品监管，规范行业发展，守护万千宠物健康。"},
+{"title":"蚊子的鸿门宴来了","text":"随着气温升高、降水增多，蚊虫迎来爆发季，被网友戏称“蚊子的鸿门宴来了”。近期多地蚊虫密度飙升，白天频繁叮咬，夜间更是扰人休息，不仅影响日常生活，还存在传播登革热、疟疾等虫媒疾病的风险。蚊虫泛滥与环境积水、植被茂密、城市积水死角清理不及时密切相关。专家提醒，夏季要做好防蚊措施，及时清理家中积水，安装纱窗蚊帐，外出涂抹驱蚊用品。社区与公共区域需加强消杀工作，从源头减少蚊虫滋生。这场夏季“蚊虫危机”，也提醒大家重视夏季卫生防护，避免被蚊虫叮咬感染疾病。"},
+{"title":"好学生成休学主力军","text":"近年教育调研数据显示，越来越多成绩优异的好学生成为休学主力军，引发教育界与社会广泛关注。不同于传统印象里差生厌学休学，这些学生多因学业压力过大、心理焦虑、情绪内耗、完美主义等问题，选择暂停学业。长期高强度内卷、过高自我期待、家校过度施压，让优秀学生背负沉重心理负担，出现失眠、抑郁、厌学等状况。教育专家指出，成绩不是衡量成长的唯一标准，心理健康至关重要。学校、家庭应转变教育观念，减轻学生压力，关注心理疏导，引导学生正视挫折，让青少年健康快乐成长，避免优秀人才被心理问题消耗。"}
 ];
 
 function showTieba(i){
     const box=document.getElementById('tiebaBox');
     const d=tiebas[i];
     let h=`<div class="tieba-title">${d.title}</div>`;
-    d.floors.forEach(f=>{
-        h+=`<div class="floor"><span class="uid">${f.u}</span><span class="time">${f.t}</span><div class="text">${f.txt}</div></div>`;
-    });
-    h+=`<button class="close" onclick="document.getElementById('tiebaBox').style.display='none'">关闭</button>`;
+    d.floors.forEach(f=>{h+=`<div class="floor"><span class="uid">${f.u}</span><span class="time">${f.t}</span><div class="text">${f.txt}</div></div>`;});
+    h+=`<button class="close" onclick="closeAll()">关闭</button>`;
     box.innerHTML=h;
     box.style.display='block';
+    showMask();
 }
-
-// ========== 下面10个：400字文章+配图 ==========
-const articles=[
-    {title:"卷卷复合肥总经理受贿事发，依法遭重罚",img:"https://images.unsplash.com/photo-1526304640581-d334cdb95d8e",text:"近日，卷卷复合肥集团总经理因长期利用职务便利收受贿赂、违规挪用企业资金，被司法机关立案查处，案件引发当地市场与农业行业广泛关注。经调查，该负责人在原料采购、经销商合作、项目招标等环节多次收受巨额好处费，为合作方提供不正当便利，严重扰乱农资市场公平秩序。\n\n随着案件细节公开，公众意识到大型农资企业腐败对农户利益、粮食安全的潜在危害。此次查处不仅是对个人违法行为的惩戒，也为行业敲响警钟。监管部门表示，将持续加强农资领域反腐力度，完善企业内控与外部监督机制，守护农业市场健康发展，维护广大农户的切身利益。"},
-    {title:"卷市股票大跌，是蓄谋已久的阴谋，还是新时代的必然结果",img:"https://images.unsplash.com/photo-1611974789677-23f579f5682a",text:"近期卷市股市出现断崖式下跌，多支权重股连续多日走低，投资者恐慌情绪蔓延，市场围绕下跌原因展开激烈讨论。有人认为背后存在资本恶意做空、内部操盘等人为阴谋，利用信息差收割散户；也有观点指出，这是经济转型、产业调整带来的必然结果。\n\n从宏观层面看，传统产业增长放缓、新兴行业竞争加剧、外部环境波动，共同冲击市场信心。同时散户投资不理性、跟风投机，放大了市场震荡。此次大跌既是风险释放，也是市场自我调整。无论是否存在人为干预，都提醒投资者理性看待波动，监管层面也需完善制度，防范恶意操控，稳定资本市场秩序。"},
-    {title:"知名历史学家张真武因病去世，享年89岁",img:"https://images.unsplash.com/photo-1580915411545-282cb1b0d780",text:"我国知名历史学家张真武先生因病逝世，享年89岁，学界与社会各界深切缅怀。张真武深耕近现代史研究六十余年，治学严谨，著作等身，聚焦地方史、民间史料、近代社会变迁，挖掘大量一手档案，填补多项学术空白。\n\n他一生淡泊名利，常年奔走各地收集口述史料与民间文献，致力于历史知识普及，多次走进校园开展讲座，鼓励青年正视历史、理性思考。其严谨的治学态度与人文情怀，影响了几代历史爱好者。先生的离世是史学界重大损失，但他留下的研究成果与精神财富，将长久激励后人继续探索历史、传承文化。"},
-    {title:"伦敦千禧穹顶开幕，全球倒计时直播，“千年虫”问题有惊无险",img:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23",text:"千禧年到来之际，伦敦千禧穹顶正式盛大开幕，全球多国同步开启跨世纪倒计时直播，成为世纪之交标志性盛事。此前全世界高度紧张的“千年虫”危机，最终有惊无险平稳度过。\n\n千年虫源于早期计算机年份仅用两位数字存储，人们担忧系统崩溃、金融瘫痪、交通失控。各国提前数年开展排查、升级、测试，投入海量人力物力。跨年当晚，全球系统平稳运行，危机解除。千禧穹顶的狂欢与千年虫的化解，见证人类迈入新世纪，既展现科技进步的力量，也让人们重视信息安全，为后续数字时代发展积累宝贵经验。"},
-    {title:"阿萨姆花卷当选卷国总统，开启长期执政",img:"https://images.unsplash.com/photo-1567449303078-57ad525a87f4",text:"经过全民大选，阿萨姆花卷成功当选卷国新一任总统，开启长期执政时代，国内舆论对此褒贬不一。阿萨姆花卷以务实亲民的竞选理念获得大量底层民众支持，承诺改善民生、稳定物价、完善公共服务，同时推进对外友好交流。\n\n反对派则担忧长期执政模式会弱化监督，影响民主活力。上任之初，新总统便推出一系列惠民政策，优先解决就业、教育、医疗难题，获得初步认可。国际社会密切关注卷国政策走向，期待该国在新领导下实现稳定发展。此次大选，也成为卷国近代政治进程中的重要转折点。"},
-    {title:"学生对食品的要求日益增高，营养学家李德明的看法",img:"https://images.unsplash.com/photo-1544025162-d76694265947",text:"如今青少年学生群体对日常饮食、校园食堂食品的要求越来越高，不再只追求饱腹，更加关注安全、营养、口味与健康。针对这一趋势，知名营养学家李德明发表专业看法，引发校园与家长广泛共鸣。\n\n李德明表示，学生处于身体发育关键阶段，合理膳食至关重要。校园食品必须严控食材安全，拒绝添加剂超标、劣质原料；同时要兼顾营养均衡，搭配蛋白质、维生素、膳食纤维。他建议学校优化食堂菜品，减少重油重盐，定期公示食材来源。同时提醒学生拒绝垃圾食品，养成健康饮食习惯，家校共同发力，守护青少年健康成长。"},
-    {title:"熊牌公司猪肉抗生素超标",img:"https://images.unsplash.com/photo-1602810317536-5e5e2a978b75",text:"近期市场监管部门抽检发现，知名肉类企业熊牌公司生产的猪肉产品存在抗生素严重超标问题，相关批次已紧急下架封存，引发消费者强烈担忧。经检测，该企业养殖环节违规大量使用抗生素，用于加快生猪生长、预防疫病，长期食用残留超标的肉类，会损害人体免疫力，诱导耐药菌产生，危害健康。\n\n事件曝光后，监管部门依法对企业立案处罚，责令整改、召回问题产品。熊牌公司公开致歉，承认养殖管理存在漏洞。此次事件再次敲响食品安全警钟，消费者呼吁加强养殖源头监管，严厉打击违规用药行为，守护餐桌安全。"},
-    {title:"央视起底宠物神药黑幕",img:"https://images.unsplash.com/photo-1551269901-5c5e14c25df7",text:"央视深度调查曝光宠物行业“神药”黑幕，大量三无兽药、违规药品在电商、宠物店流通，不少产品无正规批号、成分不明，却被包装成特效神药，坑害宠物与饲养者。调查发现，部分商家将人用禁药、过期药简单分装，虚假宣传能治百病，宠物使用后极易中毒、器官受损。\n\n宠物医疗乱象背后，是行业监管薄弱、准入门槛低、信息不透明。许多养宠家庭缺乏辨别能力，盲目相信网红爆款兽药。此次曝光推动相关部门开展专项整治，严厉打击违规生产销售行为，完善宠物药品监管，规范行业发展，守护万千宠物健康。"},
-    {title:"蚊子的鸿门宴来了",img:"https://images.unsplash.com/photo-1593106578502-225fa4f67527",text:"随着气温升高、降水增多，蚊虫迎来爆发季，被网友戏称“蚊子的鸿门宴来了”。近期多地蚊虫密度飙升，白天频繁叮咬，夜间更是扰人休息，不仅影响日常生活，还存在传播登革热、疟疾等虫媒疾病的风险。\n\n蚊虫泛滥与环境积水、植被茂密、城市积水死角清理不及时密切相关。专家提醒，夏季要做好防蚊措施，及时清理家中积水，安装纱窗蚊帐，外出涂抹驱蚊用品。社区与公共区域需加强消杀工作，从源头减少蚊虫滋生。这场夏季“蚊虫危机”，也提醒大家重视夏季卫生防护，避免被蚊虫叮咬感染疾病。"},
-    {title:"好学生成休学主力军",img:"https://images.unsplash.com/photo-1523050854058-8df90110c9f1",text:"近年教育调研数据显示，越来越多成绩优异的好学生成为休学主力军，引发教育界与社会广泛关注。不同于传统印象里差生厌学休学，这些学生多因学业压力过大、心理焦虑、情绪内耗、完美主义等问题，选择暂停学业。\n\n长期高强度内卷、过高自我期待、家校过度施压，让优秀学生背负沉重心理负担，出现失眠、抑郁、厌学等状况。教育专家指出，成绩不是衡量成长的唯一标准，心理健康至关重要。学校、家庭应转变教育观念，减轻学生压力，关注心理疏导，引导学生正视挫折，让青少年健康快乐成长，避免优秀人才被心理问题消耗。"}
-];
-
 function showArticle(i){
     const a=articles[i];
     document.getElementById('artTitle').innerText=a.title;
-    document.getElementById('artImg').src=a.img;
     document.getElementById('artText').innerText=a.text;
     document.getElementById('articleBox').style.display='block';
+    showMask();
 }
 </script>
 </body>
